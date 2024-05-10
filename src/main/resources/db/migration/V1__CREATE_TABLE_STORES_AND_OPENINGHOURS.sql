@@ -1,0 +1,23 @@
+CREATE TABLE stores (
+    id BIGSERIAL,
+    name VARCHAR(255),
+
+    address_street VARCHAR(255),
+    address_city VARCHAR(255),
+    address_state VARCHAR(255),
+    address_number VARCHAR(10),
+    address_neighborhood VARCHAR(255),
+
+    PRIMARY KEY(id)
+);
+
+CREATE TABLE opening_hours (
+    id BIGSERIAL,
+    day_of_week VARCHAR(10),
+    opening TIME,
+    closing TIME,
+    store_id BIGINT,
+    FOREIGN KEY (store_id) REFERENCES stores(id) ON DELETE CASCADE,
+
+    PRIMARY KEY(id)
+);
