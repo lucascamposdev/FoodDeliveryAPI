@@ -9,4 +9,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class StoreMinimalResponseDto {
     private String name;
+    private double latitude;
+    private double longitude;
 }

@@ -8,7 +8,7 @@ import presto.com.FoodDeliveryAPI.entity.Store;
 public class StoreMapper {
 
     public static Store toEntity(StoreRequestDto dto){
-        Store newStore = new Store(null, dto.getName(), null);
+        Store newStore = new Store(null, dto.getName(), dto.getLatitude(), dto.getLongitude(), null);
 
         var openingDays = OpeningHoursMapper
                 .toListFromStoreRequest(newStore, dto);
@@ -19,12 +19,14 @@ public class StoreMapper {
     }
 
     public static StoreMinimalResponseDto toMinimalResponse (Store entity){
-        return new StoreMinimalResponseDto(entity.getName());
+        return new StoreMinimalResponseDto(entity.getName(), entity.getLatitude(), entity.getLongitude());
     }
 
     public static StoreResponseDto toResponse(Store entity){
         return new StoreResponseDto(
                 entity.getName(),
+                entity.getLatitude(),
+                entity.getLongitude(),
                 OpeningHoursMapper.toListFromStoreEntity(entity));
     }
 

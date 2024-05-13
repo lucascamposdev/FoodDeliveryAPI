@@ -13,14 +13,16 @@ import java.util.List;
 @Table(name = "stores")
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
 @Setter
+@Getter
 public class Store {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     private String name;
+    private double latitude;
+    private double longitude;
 
     @OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
     @JsonManagedReference

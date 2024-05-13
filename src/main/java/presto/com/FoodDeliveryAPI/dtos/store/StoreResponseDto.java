@@ -13,5 +13,7 @@ import java.util.List;
 public class StoreResponseDto {
 
     private String name;
+    private double latitude;
+    private double longitude;
     private List<OpeningHours> openingDays;
 }
