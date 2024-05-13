@@ -11,7 +11,7 @@ public class StoreMapper {
         Store newStore = new Store(null, dto.getName(), dto.getLatitude(), dto.getLongitude(), null);
 
         var openingDays = OpeningHoursMapper
-                .toListFromStoreRequest(newStore, dto);
+                .toList(newStore, dto);
 
         newStore.setOpeningDays(openingDays);
 
@@ -27,7 +27,7 @@ public class StoreMapper {
                 entity.getName(),
                 entity.getLatitude(),
                 entity.getLongitude(),
-                OpeningHoursMapper.toListFromStoreEntity(entity));
+                OpeningHoursMapper.toList(entity));
     }
 
 
