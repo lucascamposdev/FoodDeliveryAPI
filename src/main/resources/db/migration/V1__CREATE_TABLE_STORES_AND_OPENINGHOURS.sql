@@ -2,11 +2,8 @@ CREATE TABLE stores (
     id BIGSERIAL,
     name VARCHAR(255),
 
-    address_street VARCHAR(255),
-    address_city VARCHAR(255),
-    address_state VARCHAR(255),
-    address_number VARCHAR(10),
-    address_neighborhood VARCHAR(255),
+    latitude DOUBLE PRECISION,
+    longitude DOUBLE PRECISION,
 
     PRIMARY KEY(id)
 );
