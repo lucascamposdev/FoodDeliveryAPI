@@ -21,6 +21,7 @@ public class Store {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     private String name;
+
     private double latitude;
     private double longitude;
 

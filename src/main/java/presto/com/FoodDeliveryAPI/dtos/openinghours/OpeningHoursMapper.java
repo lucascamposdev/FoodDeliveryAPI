@@ -11,7 +11,7 @@ import java.util.List;
 @Component
 public class OpeningHoursMapper {
 
-    public static List<OpeningHours> toListFromStoreRequest(Store store, StoreRequestDto dto){
+    public static List<OpeningHours> toList(Store store, StoreRequestDto dto){
         List<OpeningHours> list = new ArrayList<>();
 
         for(OpeningHours openingHours : dto.getOpeningDays()){
@@ -25,13 +25,12 @@ public class OpeningHoursMapper {
         return list;
     }
 
-    public static List<OpeningHours> toListFromStoreEntity(Store store){
+    public static List<OpeningHours> toList(Store store){
         List<OpeningHours> list = new ArrayList<>();
-
 
         for(OpeningHours openingHours : store.getOpeningDays()){
             list.add(new OpeningHours(
-                    null,
+                    openingHours.getId(),
                     openingHours.getDayOfWeek(),
                     openingHours.getOpening(),
                     openingHours.getClosing(),
