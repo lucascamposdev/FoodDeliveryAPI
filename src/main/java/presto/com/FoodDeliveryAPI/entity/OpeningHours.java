@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import presto.com.FoodDeliveryAPI.enums.DayOfWeek;
 
 import java.time.LocalTime;
@@ -11,6 +12,7 @@ import java.time.LocalTime;
 @Entity
 @AllArgsConstructor
 @Getter
+@NoArgsConstructor
 public class OpeningHours {
 
     @Id
