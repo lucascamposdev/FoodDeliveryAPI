@@ -13,16 +13,16 @@ import java.util.List;
 @Setter
 public class StoreRequestDto {
 
-    @NotNull
+    @NotNull(message = "Nome do estabelecimento não deve ser nulo.")
     private String name;
 
-    @NotNull
+    @NotNull(message = "Posição da latitude não deve ser nulo.")
     private Double latitude;
 
-    @NotNull
+    @NotNull(message = "Posição da longitude não deve ser nulo.")
     private Double longitude;
 
-    @NotNull
+    @NotNull(message = "Distância do raio de entrega não deve ser nulo.")
     private Integer deliveryRadius;
 
     @Size(min = 7, max = 7, message = "A lista deve obter os 7 dias da semana.")
