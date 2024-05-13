@@ -8,7 +8,7 @@ import presto.com.FoodDeliveryAPI.entity.Store;
 public class StoreMapper {
 
     public static Store toEntity(StoreRequestDto dto){
-        Store newStore = new Store(null, dto.getName(), dto.getLatitude(), dto.getLongitude(), null);
+        Store newStore = new Store(null, dto.getName(), dto.getLatitude(), dto.getLongitude(), dto.getDeliveryRadius(), null);
 
         var openingDays = OpeningHoursMapper
                 .toList(newStore, dto);

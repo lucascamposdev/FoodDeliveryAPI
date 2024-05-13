@@ -22,8 +22,10 @@ public class Store {
     Long id;
     private String name;
 
-    private double latitude;
-    private double longitude;
+    private Double latitude;
+    private Double longitude;
+
+    private Integer deliveryRadius;
 
     @OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
     @JsonManagedReference
