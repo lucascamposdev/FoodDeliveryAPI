@@ -28,6 +28,7 @@ public class OpeningHoursMapper {
     public static List<OpeningHours> toListFromStoreEntity(Store store){
         List<OpeningHours> list = new ArrayList<>();
 
+
         for(OpeningHours openingHours : store.getOpeningDays()){
             list.add(new OpeningHours(
                     null,

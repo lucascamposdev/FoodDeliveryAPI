@@ -22,9 +22,6 @@ public class Store {
     Long id;
     private String name;
 
-    @Embedded
-    private Address address;
-
     @OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<OpeningHours> openingDays;

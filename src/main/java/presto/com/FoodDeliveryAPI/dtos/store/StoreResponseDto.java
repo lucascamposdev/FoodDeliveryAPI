@@ -17,6 +17,5 @@ import java.util.List;
 public class StoreResponseDto {
 
     private String name;
-    private Address address;
     private List<OpeningHours> openingDays;
 }
