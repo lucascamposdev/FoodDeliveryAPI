@@ -4,6 +4,7 @@ package presto.com.FoodDeliveryAPI.dtos.user;
 import presto.com.FoodDeliveryAPI.dtos.address.AddressMapper;
 import presto.com.FoodDeliveryAPI.entity.Location;
 import presto.com.FoodDeliveryAPI.entity.User;
+import presto.com.FoodDeliveryAPI.enums.AccountType;
 
 public class UserMapper {
 
@@ -13,6 +14,7 @@ public class UserMapper {
                 dto.getName(),
                 dto.getEmail(),
                 dto.getPassword(),
+                AccountType.USER,
                 new Location(dto.getLocation().getLatitude(), dto.getLocation().getLongitude()),
                 AddressMapper.toAddressFromUserRequest(dto)
         );
@@ -22,6 +24,7 @@ public class UserMapper {
         return new UserResponseDto(
             entity.getName(),
                 entity.getEmail(),
+                entity.getAccountType(),
                 new Location(entity.getLocation().getLatitude(), entity.getLocation().getLongitude()),
                 AddressMapper.toAddressFromUserEntity(entity)
         );

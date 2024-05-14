@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import presto.com.FoodDeliveryAPI.entity.Address;
 import presto.com.FoodDeliveryAPI.entity.Location;
+import presto.com.FoodDeliveryAPI.enums.AccountType;
 
 @Getter
 @AllArgsConstructor
@@ -15,8 +16,7 @@ import presto.com.FoodDeliveryAPI.entity.Location;
 public class UserResponseDto {
     private String name;
     private String email;
-
+    private AccountType accountType;
     private Location location;
-
     private Address address;
 }

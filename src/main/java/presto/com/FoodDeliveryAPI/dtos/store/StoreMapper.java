@@ -6,6 +6,7 @@ import presto.com.FoodDeliveryAPI.dtos.openinghours.OpeningHoursMapper;
 import presto.com.FoodDeliveryAPI.entity.Address;
 import presto.com.FoodDeliveryAPI.entity.Location;
 import presto.com.FoodDeliveryAPI.entity.Store;
+import presto.com.FoodDeliveryAPI.enums.AccountType;
 
 @Component
 public class StoreMapper {
@@ -15,6 +16,7 @@ public class StoreMapper {
                 null,
                 dto.getName(),
                 new Location(dto.getLocation().getLatitude(), dto.getLocation().getLongitude()),
+                AccountType.STORE,
                 dto.getDeliveryRadius(),
                 null,
                 null);
@@ -40,6 +42,7 @@ public class StoreMapper {
     public static StoreResponseDto toResponse(Store entity){
         return new StoreResponseDto(
                 entity.getName(),
+                entity.getAccountType(),
                 new Location(entity.getLocation().getLatitude(), entity.getLocation().getLongitude()),
                 AddressMapper.toAddressFromStoreEntity(entity),
                 OpeningHoursMapper.toList(entity));

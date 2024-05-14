@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import presto.com.FoodDeliveryAPI.entity.Address;
 import presto.com.FoodDeliveryAPI.entity.Location;
 import presto.com.FoodDeliveryAPI.entity.OpeningHours;
+import presto.com.FoodDeliveryAPI.enums.AccountType;
 
 import java.util.List;
 
@@ -15,6 +16,7 @@ import java.util.List;
 public class StoreResponseDto {
 
     private String name;
+    private AccountType accountType;
     private Location location;
     private Address address;
     private List<OpeningHours> openingDays;

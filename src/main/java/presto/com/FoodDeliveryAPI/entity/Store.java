@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import presto.com.FoodDeliveryAPI.enums.AccountType;
 
 import java.util.List;
 
@@ -24,6 +25,9 @@ public class Store {
 
     @Embedded
     private Location location;
+
+    @Enumerated(EnumType.STRING)
+    private AccountType accountType;
 
     private Integer deliveryRadius;
 

@@ -9,6 +9,7 @@ import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import presto.com.FoodDeliveryAPI.enums.AccountType;
 
 import java.util.Collection;
 import java.util.List;
@@ -27,6 +28,9 @@ public class User implements UserDetails {
     private String email;
     @Setter
     private String password;
+
+    @Enumerated(EnumType.STRING)
+    private AccountType accountType;
 
     @Embedded
     private Location location;
