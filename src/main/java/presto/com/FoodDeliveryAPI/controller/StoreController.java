@@ -35,4 +35,5 @@ public class StoreController {
         var listResponse = list.map(StoreMapper::toMinimalResponse);
         return ResponseEntity.status(HttpStatus.CREATED).body(listResponse);
     }
+
 }
