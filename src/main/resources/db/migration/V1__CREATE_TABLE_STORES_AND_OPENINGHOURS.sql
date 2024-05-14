@@ -15,6 +15,8 @@ CREATE TABLE stores (
     address_state VARCHAR(20),
     address_cep VARCHAR(20),
 
+    account_type VARCHAR(10),
+
     PRIMARY KEY(id)
 );
 

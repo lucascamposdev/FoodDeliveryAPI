@@ -20,7 +20,7 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
-public class User implements UserDetails {
+public class User implements UserDetails, Autenticable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
