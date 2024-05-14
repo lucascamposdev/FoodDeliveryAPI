@@ -13,7 +13,7 @@ import presto.com.FoodDeliveryAPI.dtos.store.StoreResponseDto;
 import presto.com.FoodDeliveryAPI.service.StoreService;
 
 @RestController
-@RequestMapping("/api/v1/stores")
+@RequestMapping("api/v1/stores")
 public class StoreController {
 
     private final StoreService storeService;

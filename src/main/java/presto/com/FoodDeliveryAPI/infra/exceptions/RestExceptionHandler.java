@@ -55,6 +55,12 @@ public class RestExceptionHandler {
         ApiErrorMessage apiErrorMessage = new ApiErrorMessage(ex.getMessage());
         return ResponseEntity.badRequest().body(apiErrorMessage);
     }
+
+    @ExceptionHandler(DataAlreadyExistsException.class)
+    public ResponseEntity<ApiErrorMessage> handleDataAlreadyExistsException(DataAlreadyExistsException ex){
+        ApiErrorMessage apiErrorMessage = new ApiErrorMessage(ex.getMessage());
+        return ResponseEntity.badRequest().body(apiErrorMessage);
+    }
 }
 
 
