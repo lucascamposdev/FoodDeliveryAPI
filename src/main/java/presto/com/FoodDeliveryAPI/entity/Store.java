@@ -27,6 +27,9 @@ public class Store {
 
     private Integer deliveryRadius;
 
+    @Embedded
+    private Address address;
+
     @OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<OpeningHours> openingDays;
