@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import presto.com.FoodDeliveryAPI.entity.Address;
+import presto.com.FoodDeliveryAPI.entity.Location;
 import presto.com.FoodDeliveryAPI.entity.OpeningHours;
 
 import java.util.List;
@@ -14,8 +15,7 @@ import java.util.List;
 public class StoreResponseDto {
 
     private String name;
-    private double latitude;
-    private double longitude;
+    private Location location;
     private Address address;
     private List<OpeningHours> openingDays;
 }

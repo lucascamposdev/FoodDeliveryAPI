@@ -22,8 +22,8 @@ public class Store {
     Long id;
     private String name;
 
-    private Double latitude;
-    private Double longitude;
+    @Embedded
+    private Location location;
 
     private Integer deliveryRadius;
 

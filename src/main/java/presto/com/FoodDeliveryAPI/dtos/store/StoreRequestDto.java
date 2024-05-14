@@ -7,6 +7,7 @@ import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 import presto.com.FoodDeliveryAPI.entity.Address;
+import presto.com.FoodDeliveryAPI.entity.Location;
 import presto.com.FoodDeliveryAPI.entity.OpeningHours;
 
 import java.util.List;
@@ -18,11 +19,8 @@ public class StoreRequestDto {
     @NotNull(message = "Nome do estabelecimento não deve ser nulo.")
     private String name;
 
-    @NotNull(message = "Posição da latitude não deve ser nulo.")
-    private Double latitude;
-
-    @NotNull(message = "Posição da longitude não deve ser nulo.")
-    private Double longitude;
+    @NotNull(message = "Localização do estabelecimento não deve ser nulo.")
+    private Location location;
 
     @NotNull(message = "Distância do raio de entrega não deve ser nulo.")
     private Integer deliveryRadius;
