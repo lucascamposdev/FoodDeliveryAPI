@@ -40,8 +40,8 @@ public class JWTFilter extends OncePerRequestFilter {
                 var authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
                 SecurityContextHolder.getContext().setAuthentication(authentication);
 
-            }catch (InvalidTokenException ex){
-                sendErrorResponse(ex, response);
+            }catch (Exception ex){
+                sendErrorResponse(response);
                 return;
             }
         }
@@ -55,8 +55,8 @@ public class JWTFilter extends OncePerRequestFilter {
         return authHeader.replace("Bearer ", "");
     }
 
-    private void sendErrorResponse (Exception ex, HttpServletResponse response) throws IOException {
-        ApiErrorMessage msg = new ApiErrorMessage(ex.getMessage());
+    private void sendErrorResponse (HttpServletResponse response) throws IOException {
+        ApiErrorMessage msg = new ApiErrorMessage("Invalid token.");
 
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         response.setCharacterEncoding("UTF-8");

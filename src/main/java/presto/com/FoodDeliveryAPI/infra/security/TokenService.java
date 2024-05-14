@@ -23,7 +23,7 @@ public class TokenService {
             Algorithm algorithm = Algorithm.HMAC256(secret);
             return JWT.create()
                     .withIssuer("foodDelivery-api")
-                    .withSubject(user.getUsername())
+                    .withSubject(user.getEmail())
                     .withExpiresAt(generateExpirationDate())
                     .sign(algorithm);
         }catch (JWTCreationException ex){
@@ -41,7 +41,6 @@ public class TokenService {
                     .verify(token)
                     .getSubject();
         }catch (JWTVerificationException ex){
-            System.out.println("Token não válido");
             return "";
         }
     }
