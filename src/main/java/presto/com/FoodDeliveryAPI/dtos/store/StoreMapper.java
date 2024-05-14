@@ -15,6 +15,8 @@ public class StoreMapper {
         Store newStore = new Store(
                 null,
                 dto.getName(),
+                dto.getEmail(),
+                dto.getPassword(),
                 new Location(dto.getLocation().getLatitude(), dto.getLocation().getLongitude()),
                 AccountType.STORE,
                 dto.getDeliveryRadius(),

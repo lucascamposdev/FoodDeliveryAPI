@@ -1,6 +1,8 @@
 CREATE TABLE stores (
     id BIGSERIAL,
     name VARCHAR(255),
+    email VARCHAR(100),
+    password VARCHAR(100),
 
     latitude DOUBLE PRECISION,
     longitude DOUBLE PRECISION,
