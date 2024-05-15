@@ -28,6 +28,9 @@ public class StoreService {
     private CredentialsRepository credentialsRepository;
 
     @Autowired
+    private UtilityService utilityService;
+
+    @Autowired
     private NotEqualDaysValidation notEqualDaysValidation;
 
     public Store register(StoreRequestDto dto){
@@ -68,53 +71,16 @@ public class StoreService {
             store.setLocation(dto.getLocation());
         }
         if (dto.getCredentials() != null) {
-            updateCredentials(store, dto.getCredentials());
+            utilityService.updateCredentials(store.getCredentials(), dto.getCredentials());
         }
         if (dto.getAddress() != null) {
-            updateAddress(store, dto.getAddress());
+            utilityService.updateAddress(store.getAddress(), dto.getAddress());
         }
         if (dto.getOpeningDays() != null) {
             updateOpeningHours(store, dto.getOpeningDays());
         }
 
         return storeRepository.save(store);
-    }
-
-    private void updateCredentials(Store store, Credentials credentialsDto){
-        Credentials credentials = store.getCredentials();
-
-        if (credentialsDto.getEmail() != null) {
-            credentials.setEmail(credentialsDto.getEmail());
-        }
-        if (credentialsDto.getPassword() != null) {
-            credentials.setEmail(credentialsDto.getPassword());
-        }
-    }
-
-    private void updateAddress(Store store, Address addressDto) {
-        Address address = store.getAddress();
-
-        if (addressDto.getAddress_street() != null) {
-            address.setAddress_street(addressDto.getAddress_street());
-        }
-        if (addressDto.getAddress_number() != null) {
-            address.setAddress_number(addressDto.getAddress_number());
-        }
-        if (addressDto.getAddress_complement() != null) {
-            address.setAddress_complement(addressDto.getAddress_complement());
-        }
-        if (addressDto.getAddress_neighborhood() != null) {
-            address.setAddress_neighborhood(addressDto.getAddress_neighborhood());
-        }
-        if (addressDto.getAddress_city() != null) {
-            address.setAddress_city(addressDto.getAddress_city());
-        }
-        if (addressDto.getAddress_state() != null) {
-            address.setAddress_state(addressDto.getAddress_state());
-        }
-        if (addressDto.getAddress_cep() != null) {
-            address.setAddress_cep(addressDto.getAddress_cep());
-        }
     }
 
     private void updateOpeningHours(Store store, List<OpeningHours> openingDaysDto) {
