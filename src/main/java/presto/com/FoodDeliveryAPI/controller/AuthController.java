@@ -15,8 +15,8 @@ import presto.com.FoodDeliveryAPI.dtos.auth.AuthLoginDto;
 import presto.com.FoodDeliveryAPI.dtos.user.UserMapper;
 import presto.com.FoodDeliveryAPI.dtos.user.UserRequestDto;
 import presto.com.FoodDeliveryAPI.dtos.user.UserResponseDto;
+import presto.com.FoodDeliveryAPI.entity.Credentials;
 import presto.com.FoodDeliveryAPI.infra.security.TokenService;
-import presto.com.FoodDeliveryAPI.service.UserService;
 
 @RestController
 @RequestMapping("api/v1/auth")
@@ -26,27 +26,14 @@ public class AuthController {
     private AuthenticationManager manager;
 
     @Autowired
-    private UserService userService;
-
-    @Autowired
     private TokenService tokenService;
 
-    @PostMapping("/register")
-    public ResponseEntity<UserResponseDto> register(@RequestBody @Valid UserRequestDto dto){
-        var createdUser = userService.create(dto);
-        var createUserResponse = UserMapper.fromUserEntityToUserResponse(createdUser);
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(createUserResponse);
-    }
-
-    @PostMapping("/login")
+    @PostMapping
     public ResponseEntity<TokenDto> login(@RequestBody @Valid AuthLoginDto dto){
-        System.out.println(dto.getEmail() + dto.getPassword());
         var credentials = new UsernamePasswordAuthenticationToken(dto.getEmail(), dto.getPassword());
-        System.out.println(credentials);
         var authentication = manager.authenticate(credentials);
 
-        var token = tokenService.generateToken((Authenticable) authentication.getPrincipal());
+        var token = tokenService.generateToken((Credentials) authentication.getPrincipal());
 
         return ResponseEntity.ok(new TokenDto(token));
     }

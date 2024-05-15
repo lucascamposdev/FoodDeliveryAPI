@@ -27,6 +27,7 @@ public class Store {
     Long id;
     private String name;
 
+    @OneToOne(cascade = CascadeType.ALL)
     private Credentials credentials;
 
     @Embedded

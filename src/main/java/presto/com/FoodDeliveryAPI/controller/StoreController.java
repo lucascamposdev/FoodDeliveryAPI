@@ -1,6 +1,7 @@
 package presto.com.FoodDeliveryAPI.controller;
 
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -16,22 +17,19 @@ import presto.com.FoodDeliveryAPI.service.StoreService;
 @RequestMapping("api/v1/stores")
 public class StoreController {
 
-    private final StoreService storeService;
-
-    public StoreController(StoreService storeService) {
-        this.storeService = storeService;
-    }
+    @Autowired
+    private StoreService service;
 
     @PostMapping
     public ResponseEntity<StoreResponseDto> register(@RequestBody @Valid StoreRequestDto dto){
-        var createdStore = storeService.register(dto);
+        var createdStore = service.register(dto);
         var createdStoreResponse = StoreMapper.toResponse(createdStore);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdStoreResponse);
     }
 
     @GetMapping
     public ResponseEntity<Page<StoreMinimalResponseDto>> findAll(Pageable page){
-        var list = storeService.findAll(page);
+        var list = service.findAll(page);
         var listResponse = list.map(StoreMapper::toMinimalResponse);
         return ResponseEntity.status(HttpStatus.CREATED).body(listResponse);
     }

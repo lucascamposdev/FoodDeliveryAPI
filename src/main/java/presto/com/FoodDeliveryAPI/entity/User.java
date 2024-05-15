@@ -24,6 +24,9 @@ public class User{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
+    private String name;
+
+    @OneToOne(cascade = CascadeType.ALL)
     private Credentials credentials;
 
     @Enumerated(EnumType.STRING)

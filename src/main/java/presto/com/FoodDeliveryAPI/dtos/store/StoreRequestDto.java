@@ -5,6 +5,7 @@ import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
 import presto.com.FoodDeliveryAPI.entity.Address;
+import presto.com.FoodDeliveryAPI.entity.Credentials;
 import presto.com.FoodDeliveryAPI.entity.Location;
 import presto.com.FoodDeliveryAPI.entity.OpeningHours;
 
@@ -17,12 +18,9 @@ public class StoreRequestDto {
     @NotNull(message = "Nome do estabelecimento não deve ser nulo.")
     private String name;
 
-    @NotBlank(message = "Email não deve ser nulo.")
-    @Email(message = "Insira um email válido.")
-    private String email;
-
-    @NotBlank(message = "Senha não deve ser nulo.")
-    private String password;
+    @NotNull(message = "Credenciais não devem ser nulo.")
+    @Valid
+    private Credentials credentials;
 
     @NotNull(message = "Localização do estabelecimento não deve ser nulo.")
     private Location location;

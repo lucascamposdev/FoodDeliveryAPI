@@ -2,28 +2,30 @@ package presto.com.FoodDeliveryAPI.dtos.user;
 
 
 import presto.com.FoodDeliveryAPI.dtos.address.AddressMapper;
+import presto.com.FoodDeliveryAPI.dtos.credentials.CredentialsMapper;
+import presto.com.FoodDeliveryAPI.dtos.credentials.CredentialsRequestDto;
+import presto.com.FoodDeliveryAPI.entity.Credentials;
 import presto.com.FoodDeliveryAPI.entity.Location;
 import presto.com.FoodDeliveryAPI.entity.User;
 import presto.com.FoodDeliveryAPI.enums.AccountType;
 
 public class UserMapper {
 
-    public static User fromUserRequestToEntity(UserRequestDto dto){
+    public static User toEntity(UserRequestDto dto){
         return new User(
                 null,
                 dto.getName(),
-                dto.getEmail(),
-                dto.getPassword(),
+                CredentialsMapper.toEntity(dto.getCredentials().getEmail(), dto.getCredentials().getPassword()),
                 AccountType.USER,
                 new Location(dto.getLocation().getLatitude(), dto.getLocation().getLongitude()),
                 AddressMapper.toAddressFromUserRequest(dto)
         );
     }
 
-    public static UserResponseDto fromUserEntityToUserResponse(User entity){
+    public static UserResponseDto toResponse(User entity){
         return new UserResponseDto(
             entity.getName(),
-                entity.getEmail(),
+                entity.getCredentials().getEmail(),
                 entity.getAccountType(),
                 new Location(entity.getLocation().getLatitude(), entity.getLocation().getLongitude()),
                 AddressMapper.toAddressFromUserEntity(entity)
