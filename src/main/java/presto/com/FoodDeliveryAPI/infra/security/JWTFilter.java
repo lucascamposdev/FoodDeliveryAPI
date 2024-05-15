@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import presto.com.FoodDeliveryAPI.infra.exceptions.ApiErrorMessage;
 import presto.com.FoodDeliveryAPI.infra.exceptions.InvalidTokenException;
+import presto.com.FoodDeliveryAPI.repository.StoreRepository;
 import presto.com.FoodDeliveryAPI.repository.UserRepository;
 
 import java.io.IOException;
@@ -24,7 +25,9 @@ public class JWTFilter extends OncePerRequestFilter {
     private TokenService tokenService;
 
     @Autowired
-    private UserRepository repository;
+    private UserRepository userRepository;
+    @Autowired
+    private StoreRepository storeRepository;
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
@@ -34,10 +37,16 @@ public class JWTFilter extends OncePerRequestFilter {
 
         if (token != null) {
             try{
-                String subject = this.tokenService.validateToken(token);
-                UserDetails user = this.repository.findByEmail(subject);
+                UserDetails account;
+                var tokenValidationResult = this.tokenService.validateToken(token);
 
-                var authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
+                if(tokenValidationResult.getAccountType().equals("USER")){
+                   account = userRepository.findByEmail(tokenValidationResult.getSubject());
+                }else{
+                   account = storeRepository.findByEmail(tokenValidationResult.getSubject());
+                }
+
+                var authentication = new UsernamePasswordAuthenticationToken(account, null, account.getAuthorities());
                 SecurityContextHolder.getContext().setAuthentication(authentication);
 
             }catch (Exception ex){

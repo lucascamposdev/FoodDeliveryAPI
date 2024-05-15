@@ -1,6 +1,5 @@
 package presto.com.FoodDeliveryAPI.entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,14 +19,12 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
-public class User implements UserDetails, Autenticable {
+public class User{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    private String name;
-    private String email;
-    @Setter
-    private String password;
+
+    private Credentials credentials;
 
     @Enumerated(EnumType.STRING)
     private AccountType accountType;
@@ -37,44 +34,4 @@ public class User implements UserDetails, Autenticable {
 
     @Embedded
     private Address address;
-
-    @Override
-    public String getUsername() {
-        return email;
-    }
-
-    public void setUsername(String email) {
-        this.email = email;
-    }
-
-    @Override
-    public String getPassword() {
-        return password;
-    }
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("ROLE_USER"));
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
-
 }

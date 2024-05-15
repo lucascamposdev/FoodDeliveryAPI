@@ -20,15 +20,14 @@ import java.util.List;
 @AllArgsConstructor
 @Setter
 @Getter
-public class Store implements UserDetails, Autenticable{
+public class Store {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     private String name;
 
-    private String email;
-    private String password;
+    private Credentials credentials;
 
     @Embedded
     private Location location;
@@ -44,39 +43,4 @@ public class Store implements UserDetails, Autenticable{
     @OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<OpeningHours> openingDays;
-
-    @Override
-    public String getEmail() {
-        return this.email;
-    }
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("ROLE_USER"));
-    }
-
-    @Override
-    public String getUsername() {
-        return this.email;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
 }
