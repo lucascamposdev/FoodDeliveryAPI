@@ -7,16 +7,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import presto.com.FoodDeliveryAPI.dtos.auth.AuthLoginDto;
 import presto.com.FoodDeliveryAPI.dtos.user.UserMapper;
 import presto.com.FoodDeliveryAPI.dtos.user.UserRequestDto;
 import presto.com.FoodDeliveryAPI.dtos.user.UserResponseDto;
 import presto.com.FoodDeliveryAPI.entity.Credentials;
 import presto.com.FoodDeliveryAPI.infra.security.TokenService;
+import presto.com.FoodDeliveryAPI.service.AuthService;
 
 @RestController
 @RequestMapping("api/v1/auth")
@@ -28,6 +26,9 @@ public class AuthController {
     @Autowired
     private TokenService tokenService;
 
+    @Autowired
+    private AuthService authService;
+
     @PostMapping
     public ResponseEntity<TokenDto> login(@RequestBody @Valid AuthLoginDto dto){
         var credentials = new UsernamePasswordAuthenticationToken(dto.getEmail(), dto.getPassword());
@@ -36,5 +37,11 @@ public class AuthController {
         var token = tokenService.generateToken((Credentials) authentication.getPrincipal());
 
         return ResponseEntity.ok(new TokenDto(token));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(@PathVariable Long id){
+        authService.deleteAccount(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }
