@@ -1,7 +1,6 @@
 package presto.com.FoodDeliveryAPI.service.validations;
 
 import org.springframework.stereotype.Component;
-import presto.com.FoodDeliveryAPI.dtos.store.StoreRequestDto;
 import presto.com.FoodDeliveryAPI.entity.OpeningHours;
 import presto.com.FoodDeliveryAPI.enums.DayOfWeek;
 import presto.com.FoodDeliveryAPI.infra.exceptions.InvalidRegisterException;

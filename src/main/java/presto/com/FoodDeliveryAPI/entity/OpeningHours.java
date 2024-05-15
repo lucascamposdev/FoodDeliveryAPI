@@ -27,16 +27,4 @@ public class OpeningHours {
     @ManyToOne
     @JsonBackReference
     private Store store;
-
-
-    @Override
-    public String toString() {
-        return "OpeningHours{" +
-                "id=" + id +
-                ", dayOfWeek=" + dayOfWeek +
-                ", opening=" + opening +
-                ", closing=" + closing +
-                ", store=" + store +
-                '}';
-    }
 }

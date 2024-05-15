@@ -1,8 +1,8 @@
-package presto.com.FoodDeliveryAPI.dtos.address;
+package presto.com.FoodDeliveryAPI.dto.address;
 
 import org.springframework.stereotype.Component;
-import presto.com.FoodDeliveryAPI.dtos.store.StoreRequestDto;
-import presto.com.FoodDeliveryAPI.dtos.user.UserRequestDto;
+import presto.com.FoodDeliveryAPI.dto.store.StoreRequestDto;
+import presto.com.FoodDeliveryAPI.dto.user.UserRequestDto;
 import presto.com.FoodDeliveryAPI.entity.Address;
 import presto.com.FoodDeliveryAPI.entity.Store;
 import presto.com.FoodDeliveryAPI.entity.User;

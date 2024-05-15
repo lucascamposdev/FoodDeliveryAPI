@@ -1,11 +1,9 @@
-package presto.com.FoodDeliveryAPI.dtos.store;
+package presto.com.FoodDeliveryAPI.dto.store;
 
 import org.springframework.stereotype.Component;
-import presto.com.FoodDeliveryAPI.dtos.address.AddressMapper;
-import presto.com.FoodDeliveryAPI.dtos.credentials.CredentialsMapper;
-import presto.com.FoodDeliveryAPI.dtos.openinghours.OpeningHoursMapper;
-import presto.com.FoodDeliveryAPI.entity.Address;
-import presto.com.FoodDeliveryAPI.entity.Credentials;
+import presto.com.FoodDeliveryAPI.dto.address.AddressMapper;
+import presto.com.FoodDeliveryAPI.dto.credentials.CredentialsMapper;
+import presto.com.FoodDeliveryAPI.dto.openinghours.OpeningHoursMapper;
 import presto.com.FoodDeliveryAPI.entity.Location;
 import presto.com.FoodDeliveryAPI.entity.Store;
 import presto.com.FoodDeliveryAPI.enums.AccountType;

@@ -5,13 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 import presto.com.FoodDeliveryAPI.enums.AccountType;
-
-import java.util.Collection;
-import java.util.List;
 
 @Entity
 @Table(name = "users")

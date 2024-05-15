@@ -1,4 +1,4 @@
-package presto.com.FoodDeliveryAPI.dtos.store;
+package presto.com.FoodDeliveryAPI.dto.store;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
@@ -32,6 +32,7 @@ public class StoreRequestDto {
     @Valid
     private Address address;
 
+    @NotNull(message = "Horários de funcionamento não devem ser nulo.")
     @Size(min = 7, max = 7, message = "A lista deve obter os 7 dias da semana.")
     private List<OpeningHours> openingDays;
 }

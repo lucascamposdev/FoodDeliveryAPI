@@ -2,24 +2,16 @@ package presto.com.FoodDeliveryAPI.service;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import presto.com.FoodDeliveryAPI.dtos.store.StoreMapper;
-import presto.com.FoodDeliveryAPI.dtos.store.StoreRequestDto;
-import presto.com.FoodDeliveryAPI.dtos.store.StoreUpdateDto;
-import presto.com.FoodDeliveryAPI.dtos.user.UserMapper;
-import presto.com.FoodDeliveryAPI.dtos.user.UserRequestDto;
-import presto.com.FoodDeliveryAPI.dtos.user.UserUpdateDto;
+import presto.com.FoodDeliveryAPI.dto.user.UserMapper;
+import presto.com.FoodDeliveryAPI.dto.user.UserRequestDto;
+import presto.com.FoodDeliveryAPI.dto.user.UserUpdateDto;
 import presto.com.FoodDeliveryAPI.entity.Credentials;
-import presto.com.FoodDeliveryAPI.entity.Store;
 import presto.com.FoodDeliveryAPI.entity.User;
 import presto.com.FoodDeliveryAPI.infra.exceptions.DataAlreadyExistsException;
 import presto.com.FoodDeliveryAPI.repository.CredentialsRepository;
-import presto.com.FoodDeliveryAPI.repository.StoreRepository;
 import presto.com.FoodDeliveryAPI.repository.UserRepository;
-import presto.com.FoodDeliveryAPI.service.validations.NotEqualDaysValidation;
 
 @Service
 public class UserService {

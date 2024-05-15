@@ -1,4 +1,4 @@
-package presto.com.FoodDeliveryAPI.dtos.store;
+package presto.com.FoodDeliveryAPI.dto.store;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -5,13 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import presto.com.FoodDeliveryAPI.dtos.store.StoreMapper;
-import presto.com.FoodDeliveryAPI.dtos.store.StoreResponseDto;
-import presto.com.FoodDeliveryAPI.dtos.store.StoreUpdateDto;
-import presto.com.FoodDeliveryAPI.dtos.user.UserMapper;
-import presto.com.FoodDeliveryAPI.dtos.user.UserRequestDto;
-import presto.com.FoodDeliveryAPI.dtos.user.UserResponseDto;
-import presto.com.FoodDeliveryAPI.dtos.user.UserUpdateDto;
+import presto.com.FoodDeliveryAPI.dto.user.UserMapper;
+import presto.com.FoodDeliveryAPI.dto.user.UserRequestDto;
+import presto.com.FoodDeliveryAPI.dto.user.UserResponseDto;
+import presto.com.FoodDeliveryAPI.dto.user.UserUpdateDto;
 import presto.com.FoodDeliveryAPI.service.UserService;
 
 @RestController

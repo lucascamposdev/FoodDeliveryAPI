@@ -28,7 +28,7 @@ public class RestExceptionHandler {
 
         if (exceptionMessage.contains("Enum")){
             message = "Nome da semana incorreto.";
-        }else if(exceptionMessage.contains("parse error")){
+        }else if(exceptionMessage.contains("parse error") || exceptionMessage.contains("body")){
             message = "Json inválido.";
         }else{
             message = ex.getMessage();

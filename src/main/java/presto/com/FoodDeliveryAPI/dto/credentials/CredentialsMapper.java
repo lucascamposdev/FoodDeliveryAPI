@@ -1,4 +1,4 @@
-package presto.com.FoodDeliveryAPI.dtos.credentials;
+package presto.com.FoodDeliveryAPI.dto.credentials;
 
 import presto.com.FoodDeliveryAPI.entity.Credentials;
 

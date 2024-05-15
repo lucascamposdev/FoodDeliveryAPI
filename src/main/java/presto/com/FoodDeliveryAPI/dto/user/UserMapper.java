@@ -1,10 +1,8 @@
-package presto.com.FoodDeliveryAPI.dtos.user;
+package presto.com.FoodDeliveryAPI.dto.user;
 
 
-import presto.com.FoodDeliveryAPI.dtos.address.AddressMapper;
-import presto.com.FoodDeliveryAPI.dtos.credentials.CredentialsMapper;
-import presto.com.FoodDeliveryAPI.dtos.credentials.CredentialsRequestDto;
-import presto.com.FoodDeliveryAPI.entity.Credentials;
+import presto.com.FoodDeliveryAPI.dto.address.AddressMapper;
+import presto.com.FoodDeliveryAPI.dto.credentials.CredentialsMapper;
 import presto.com.FoodDeliveryAPI.entity.Location;
 import presto.com.FoodDeliveryAPI.entity.User;
 import presto.com.FoodDeliveryAPI.enums.AccountType;
@@ -24,7 +22,8 @@ public class UserMapper {
 
     public static UserResponseDto toResponse(User entity){
         return new UserResponseDto(
-            entity.getName(),
+                entity.getId(),
+                entity.getName(),
                 entity.getCredentials().getEmail(),
                 entity.getAccountType(),
                 new Location(entity.getLocation().getLatitude(), entity.getLocation().getLongitude()),

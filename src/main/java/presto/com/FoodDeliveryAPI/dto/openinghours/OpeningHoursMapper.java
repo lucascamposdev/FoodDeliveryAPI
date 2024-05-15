@@ -1,7 +1,7 @@
-package presto.com.FoodDeliveryAPI.dtos.openinghours;
+package presto.com.FoodDeliveryAPI.dto.openinghours;
 
 import org.springframework.stereotype.Component;
-import presto.com.FoodDeliveryAPI.dtos.store.StoreRequestDto;
+import presto.com.FoodDeliveryAPI.dto.store.StoreRequestDto;
 import presto.com.FoodDeliveryAPI.entity.OpeningHours;
 import presto.com.FoodDeliveryAPI.entity.Store;
 

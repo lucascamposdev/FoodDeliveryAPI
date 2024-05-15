@@ -1,4 +1,4 @@
-package presto.com.FoodDeliveryAPI.dtos.auth;
+package presto.com.FoodDeliveryAPI.dto.auth;
 
 import lombok.Getter;
 
