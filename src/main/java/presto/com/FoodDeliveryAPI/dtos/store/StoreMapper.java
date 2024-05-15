@@ -45,6 +45,7 @@ public class StoreMapper {
 
     public static StoreResponseDto toResponse(Store entity){
         return new StoreResponseDto(
+                entity.getId(),
                 entity.getName(),
                 entity.getCredentials().getEmail(),
                 entity.getAccountType(),

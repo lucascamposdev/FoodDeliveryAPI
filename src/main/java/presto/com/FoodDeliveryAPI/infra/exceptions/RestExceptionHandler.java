@@ -57,6 +57,12 @@ public class RestExceptionHandler {
         return ResponseEntity.badRequest().body(apiErrorMessage);
     }
 
+    @ExceptionHandler(InvalidUpdateException.class)
+    public ResponseEntity<ApiErrorMessage> handleInvalidUpdateException(InvalidUpdateException ex){
+        ApiErrorMessage apiErrorMessage = new ApiErrorMessage(ex.getMessage());
+        return ResponseEntity.badRequest().body(apiErrorMessage);
+    }
+
     @ExceptionHandler(DataAlreadyExistsException.class)
     public ResponseEntity<ApiErrorMessage> handleDataAlreadyExistsException(DataAlreadyExistsException ex){
         ApiErrorMessage apiErrorMessage = new ApiErrorMessage(ex.getMessage());

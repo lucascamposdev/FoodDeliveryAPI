@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import presto.com.FoodDeliveryAPI.enums.DayOfWeek;
 
 import java.time.LocalTime;
@@ -12,6 +13,7 @@ import java.time.LocalTime;
 @Entity
 @AllArgsConstructor
 @Getter
+@Setter
 @NoArgsConstructor
 public class OpeningHours {
 
