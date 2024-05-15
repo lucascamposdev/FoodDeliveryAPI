@@ -31,6 +31,17 @@ public class StoreController {
         return ResponseEntity.status(HttpStatus.CREATED).body(listResponse);
     }
 
+    @GetMapping("/delivery")
+    public ResponseEntity<Page<StoreMinimalResponseDto>> findWhoDelivers(
+            Pageable page,
+            @RequestParam double latitude,
+            @RequestParam double longitude){
+
+        var list = service.findWhoDelivers(latitude, longitude, page);
+        var listResponse = list.map(StoreMapper::toMinimalResponse);
+        return ResponseEntity.status(HttpStatus.CREATED).body(listResponse);
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<StoreResponseDto> update(@PathVariable Long id, @RequestBody StoreUpdateDto dto){
         var updatedStore = service.update(id, dto);

@@ -3,6 +3,7 @@ package presto.com.FoodDeliveryAPI.service;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -53,6 +54,14 @@ public class StoreService {
 
     public Page<Store> findAll(Pageable page){
         return storeRepository.findAll(page);
+    }
+
+    public Page<Store> findWhoDelivers(double latitude, double longitude, Pageable page){
+        List<Store> list = storeRepository.findAllWhoDeliversAtThisLocation(latitude, longitude);
+
+        int start = (int) page.getOffset();
+        int end = Math.min((start + page.getPageSize()), list.size());
+        return new PageImpl<>(list.subList(start, end), page, list.size());
     }
 
     public Store update(Long id, StoreUpdateDto dto){

@@ -47,6 +47,7 @@ public class StoreMapper {
                 entity.getName(),
                 entity.getCredentials().getEmail(),
                 entity.getAccountType(),
+                entity.getDeliveryRadius(),
                 new Location(entity.getLocation().getLatitude(), entity.getLocation().getLongitude()),
                 AddressMapper.toAddressFromStoreEntity(entity),
                 OpeningHoursMapper.toList(entity));
