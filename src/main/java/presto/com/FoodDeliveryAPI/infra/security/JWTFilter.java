@@ -42,7 +42,8 @@ public class JWTFilter extends OncePerRequestFilter {
                 var authentication = new UsernamePasswordAuthenticationToken(credentials, null, credentials.getAuthorities());
                 SecurityContextHolder.getContext().setAuthentication(authentication);
 
-            }catch (InvalidTokenException ex){
+            }
+            catch (NullPointerException | InvalidTokenException ex){
                 sendErrorResponse(response);
                 return;
             }

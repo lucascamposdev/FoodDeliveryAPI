@@ -1,5 +1,6 @@
 package presto.com.FoodDeliveryAPI.infra.exceptions;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.BindingResult;
@@ -58,6 +59,12 @@ public class RestExceptionHandler {
 
     @ExceptionHandler(DataAlreadyExistsException.class)
     public ResponseEntity<ApiErrorMessage> handleDataAlreadyExistsException(DataAlreadyExistsException ex){
+        ApiErrorMessage apiErrorMessage = new ApiErrorMessage(ex.getMessage());
+        return ResponseEntity.badRequest().body(apiErrorMessage);
+    }
+
+    @ExceptionHandler(EntityNotFoundException.class)
+    public ResponseEntity<ApiErrorMessage> handleEntityNotFoundException(EntityNotFoundException ex){
         ApiErrorMessage apiErrorMessage = new ApiErrorMessage(ex.getMessage());
         return ResponseEntity.badRequest().body(apiErrorMessage);
     }
