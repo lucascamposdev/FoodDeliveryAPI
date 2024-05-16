@@ -14,7 +14,6 @@ public class UserMapper {
                 null,
                 dto.getName(),
                 CredentialsMapper.toEntity(dto.getCredentials().getEmail(), dto.getCredentials().getPassword()),
-                AccountType.USER,
                 new Location(dto.getLocation().getLatitude(), dto.getLocation().getLongitude()),
                 AddressMapper.toAddressFromUserRequest(dto)
         );
@@ -25,7 +24,6 @@ public class UserMapper {
                 entity.getId(),
                 entity.getName(),
                 entity.getCredentials().getEmail(),
-                entity.getAccountType(),
                 new Location(entity.getLocation().getLatitude(), entity.getLocation().getLongitude()),
                 AddressMapper.toAddressFromUserEntity(entity)
         );

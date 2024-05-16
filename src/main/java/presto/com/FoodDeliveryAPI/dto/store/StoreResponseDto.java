@@ -18,7 +18,6 @@ public class StoreResponseDto {
     private Long id;
     private String name;
     private String email;
-    private AccountType accountType;
     private Integer deliveryRadius;
     private Location location;
     private Address address;

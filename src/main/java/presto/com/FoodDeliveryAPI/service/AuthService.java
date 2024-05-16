@@ -4,6 +4,7 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -19,9 +20,6 @@ public class AuthService implements UserDetailsService {
     CredentialsRepository repository;
 
     @Autowired
-    private AuthenticationManager manager;
-
-    @Autowired
     private TokenService tokenService;
 
     @Override
@@ -29,11 +27,10 @@ public class AuthService implements UserDetailsService {
         return repository.findByEmail(username);
     }
 
-    public String login(AuthLoginDto dto){
-        var credentials = new UsernamePasswordAuthenticationToken(dto.getEmail(), dto.getPassword());
-        var authentication = manager.authenticate(credentials);
+    public String login(Authentication authentication, AuthLoginDto dto){
 
         var token = tokenService.generateToken((Credentials) authentication.getPrincipal());
+        return token;
     }
 
     public void deleteAccount(Long id){

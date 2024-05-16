@@ -23,9 +23,6 @@ public class User{
     @OneToOne(cascade = CascadeType.ALL)
     private Credentials credentials;
 
-    @Enumerated(EnumType.STRING)
-    private AccountType accountType;
-
     @Embedded
     private Location location;
 

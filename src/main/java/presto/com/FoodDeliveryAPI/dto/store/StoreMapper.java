@@ -17,7 +17,6 @@ public class StoreMapper {
                 dto.getName(),
                 CredentialsMapper.toEntity(dto.getCredentials().getEmail(), dto.getCredentials().getPassword()),
                 new Location(dto.getLocation().getLatitude(), dto.getLocation().getLongitude()),
-                AccountType.STORE,
                 dto.getDeliveryRadius(),
                 null,
                 null);
@@ -35,7 +34,6 @@ public class StoreMapper {
     public static StoreMinimalResponseDto toMinimalResponse (Store entity){
         return new StoreMinimalResponseDto(
                 entity.getName(),
-                entity.getAccountType(),
                 new Location(
                         entity.getLocation().getLatitude(),
                         entity.getLocation().getLongitude()));
@@ -46,7 +44,6 @@ public class StoreMapper {
                 entity.getId(),
                 entity.getName(),
                 entity.getCredentials().getEmail(),
-                entity.getAccountType(),
                 entity.getDeliveryRadius(),
                 new Location(entity.getLocation().getLatitude(), entity.getLocation().getLongitude()),
                 AddressMapper.toAddressFromStoreEntity(entity),

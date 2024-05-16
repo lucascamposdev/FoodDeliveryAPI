@@ -14,7 +14,6 @@ public class UserResponseDto {
     private Long id;
     private String name;
     private String email;
-    private AccountType accountType;
     private Location location;
     private Address address;
 }

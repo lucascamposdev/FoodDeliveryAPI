@@ -11,6 +11,5 @@ import presto.com.FoodDeliveryAPI.enums.AccountType;
 @AllArgsConstructor
 public class StoreMinimalResponseDto {
     private String name;
-    private AccountType accountType;
     private Location location;
 }

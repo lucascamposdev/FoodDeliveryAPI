@@ -29,9 +29,6 @@ public class Store {
     @Embedded
     private Location location;
 
-    @Enumerated(EnumType.STRING)
-    private AccountType accountType;
-
     private Integer deliveryRadius;
 
     @Embedded
