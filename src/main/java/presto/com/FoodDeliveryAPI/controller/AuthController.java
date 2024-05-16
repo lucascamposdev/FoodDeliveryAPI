@@ -17,23 +17,15 @@ import presto.com.FoodDeliveryAPI.service.AuthService;
 @RequestMapping("api/v1/auth")
 public class AuthController {
 
-    @Autowired
-    private AuthenticationManager manager;
 
-    @Autowired
-    private TokenService tokenService;
 
     @Autowired
     private AuthService authService;
 
     @PostMapping
     public ResponseEntity<TokenDto> login(@RequestBody @Valid AuthLoginDto dto){
-        var credentials = new UsernamePasswordAuthenticationToken(dto.getEmail(), dto.getPassword());
-        var authentication = manager.authenticate(credentials);
-
-        var token = tokenService.generateToken((Credentials) authentication.getPrincipal());
-
-        return ResponseEntity.ok(new TokenDto(token));
+        var response = authService.login(dto);
+        return ResponseEntity.ok(new TokenDto(response));
     }
 
     @DeleteMapping("/{id}")
