@@ -11,10 +11,8 @@ import presto.com.FoodDeliveryAPI.enums.AccountType;
 @AllArgsConstructor
 @Setter
 public class TokenDto {
-
     private AccountType accountType;
     private Long accountId;
     private Long objectId;
     private String token;
-
 }

@@ -28,6 +28,9 @@ public class AuthService implements UserDetailsService {
     StoreRepository storeRepository;
 
     @Autowired
+    UtilityService utilityService;
+
+    @Autowired
     private TokenService tokenService;
 
     @Override
@@ -61,6 +64,8 @@ public class AuthService implements UserDetailsService {
         if(!credentialsRepository.existsById(id)){
             throw new EntityNotFoundException("Nenhuma conta associada a este Id foi encontrada.");
         }
+
+        utilityService.checkPermission(id);
 
         credentialsRepository.deleteById(id);
     }

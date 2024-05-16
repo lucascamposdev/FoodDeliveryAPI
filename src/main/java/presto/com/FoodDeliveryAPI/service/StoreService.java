@@ -71,6 +71,7 @@ public class StoreService {
                 .findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(("Nenhuma conta associada a este Id foi encontrada.")));
 
+        utilityService.checkPermission(store.getCredentials().getId());
 
         if (dto.getName() != null) {
             store.setName(dto.getName());

@@ -1,11 +1,15 @@
 package presto.com.FoodDeliveryAPI.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import presto.com.FoodDeliveryAPI.entity.Address;
 import presto.com.FoodDeliveryAPI.entity.Credentials;
 import presto.com.FoodDeliveryAPI.entity.Store;
 import presto.com.FoodDeliveryAPI.infra.exceptions.DataAlreadyExistsException;
+import presto.com.FoodDeliveryAPI.infra.exceptions.InvalidPermissionException;
+import presto.com.FoodDeliveryAPI.infra.exceptions.InvalidUpdateException;
 import presto.com.FoodDeliveryAPI.repository.CredentialsRepository;
 
 @Service
@@ -48,6 +52,15 @@ public class UtilityService {
         }
         if (addressDto.getAddress_cep() != null) {
             address.setAddress_cep(addressDto.getAddress_cep());
+        }
+    }
+
+    public void checkPermission(Long id){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Long currentAuthenticatedId = ((Credentials) authentication.getPrincipal()).getId();
+
+        if (id != currentAuthenticatedId) {
+            throw new InvalidPermissionException("Você não tem permissão para acessar este perfil.");
         }
     }
 }
