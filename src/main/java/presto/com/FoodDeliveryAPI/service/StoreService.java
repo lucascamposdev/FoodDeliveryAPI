@@ -11,6 +11,7 @@ import presto.com.FoodDeliveryAPI.dto.store.StoreMapper;
 import presto.com.FoodDeliveryAPI.dto.store.StoreRequestDto;
 import presto.com.FoodDeliveryAPI.dto.store.StoreUpdateDto;
 import presto.com.FoodDeliveryAPI.entity.*;
+import presto.com.FoodDeliveryAPI.enums.AccountType;
 import presto.com.FoodDeliveryAPI.infra.exceptions.DataAlreadyExistsException;
 import presto.com.FoodDeliveryAPI.infra.exceptions.InvalidUpdateException;
 import presto.com.FoodDeliveryAPI.repository.CredentialsRepository;
@@ -43,6 +44,7 @@ public class StoreService {
 
         Credentials registerCredentials = dto.getCredentials();
 
+        registerCredentials.setAccountType(AccountType.STORE);
         registerCredentials.setPassword(
                 new BCryptPasswordEncoder().encode(registerCredentials.getPassword()));
 

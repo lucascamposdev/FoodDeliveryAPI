@@ -9,6 +9,7 @@ import presto.com.FoodDeliveryAPI.dto.user.UserRequestDto;
 import presto.com.FoodDeliveryAPI.dto.user.UserUpdateDto;
 import presto.com.FoodDeliveryAPI.entity.Credentials;
 import presto.com.FoodDeliveryAPI.entity.User;
+import presto.com.FoodDeliveryAPI.enums.AccountType;
 import presto.com.FoodDeliveryAPI.infra.exceptions.DataAlreadyExistsException;
 import presto.com.FoodDeliveryAPI.repository.CredentialsRepository;
 import presto.com.FoodDeliveryAPI.repository.UserRepository;
@@ -33,6 +34,7 @@ public class UserService {
 
         Credentials registerCredentials = dto.getCredentials();
 
+        registerCredentials.setAccountType(AccountType.USER);
         registerCredentials.setPassword(
                 new BCryptPasswordEncoder().encode(registerCredentials.getPassword()));
 

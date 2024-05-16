@@ -13,7 +13,7 @@ public class UserMapper {
         return new User(
                 null,
                 dto.getName(),
-                CredentialsMapper.toEntity(dto.getCredentials().getEmail(), dto.getCredentials().getPassword()),
+                CredentialsMapper.toEntity(dto.getCredentials().getEmail(), dto.getCredentials().getPassword(), dto.getCredentials().getAccountType()),
                 new Location(dto.getLocation().getLatitude(), dto.getLocation().getLongitude()),
                 AddressMapper.toAddressFromUserRequest(dto)
         );

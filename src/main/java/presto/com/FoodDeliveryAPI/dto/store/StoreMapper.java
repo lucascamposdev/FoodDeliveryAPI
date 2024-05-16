@@ -15,7 +15,7 @@ public class StoreMapper {
         Store newStore = new Store(
                 null,
                 dto.getName(),
-                CredentialsMapper.toEntity(dto.getCredentials().getEmail(), dto.getCredentials().getPassword()),
+                CredentialsMapper.toEntity(dto.getCredentials().getEmail(), dto.getCredentials().getPassword(), dto.getCredentials().getAccountType()),
                 new Location(dto.getLocation().getLatitude(), dto.getLocation().getLongitude()),
                 dto.getDeliveryRadius(),
                 null,

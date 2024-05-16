@@ -1,9 +1,6 @@
 package presto.com.FoodDeliveryAPI.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jdk.jfr.Enabled;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,6 +9,7 @@ import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import presto.com.FoodDeliveryAPI.enums.AccountType;
 
 import java.util.Collection;
 import java.util.List;
@@ -28,6 +26,9 @@ public class Credentials implements UserDetails {
     private Long id;
     private String email;
     private String password;
+
+    @Enumerated(EnumType.STRING)
+    private AccountType accountType;
 
     @Override
     public String getUsername() {

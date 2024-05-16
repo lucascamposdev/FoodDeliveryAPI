@@ -1,4 +1,4 @@
-package com.presto.Presto.Med.infra.security;
+package presto.com.FoodDeliveryAPI.dto.token;
 
 import lombok.Getter;
 
