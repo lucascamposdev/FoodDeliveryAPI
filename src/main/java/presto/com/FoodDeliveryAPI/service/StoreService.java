@@ -12,9 +12,8 @@ import presto.com.FoodDeliveryAPI.dto.store.StoreRequestDto;
 import presto.com.FoodDeliveryAPI.dto.store.StoreUpdateDto;
 import presto.com.FoodDeliveryAPI.entity.*;
 import presto.com.FoodDeliveryAPI.enums.AccountType;
-import presto.com.FoodDeliveryAPI.infra.exceptions.InvalidUpdateException;
 import presto.com.FoodDeliveryAPI.repository.StoreRepository;
-import presto.com.FoodDeliveryAPI.service.validations.NotEqualDaysValidation;
+import presto.com.FoodDeliveryAPI.service.validations.openingDaysValidation;
 
 import java.util.List;
 
@@ -28,11 +27,11 @@ public class StoreService {
     private UtilityService utilityService;
 
     @Autowired
-    private NotEqualDaysValidation notEqualDaysValidation;
+    private openingDaysValidation openingDaysValidation;
 
     public Store register(StoreRequestDto dto){
 
-        notEqualDaysValidation.validate(dto.getOpeningDays());
+        openingDaysValidation.validate(dto.getOpeningDays());
 
         Credentials registerCredentials = dto.getCredentials();
 
@@ -88,11 +87,7 @@ public class StoreService {
     }
 
     private void updateOpeningHours(Store store, List<OpeningHours> openingDaysDto) {
-        notEqualDaysValidation.validate(openingDaysDto);
-
-        if (openingDaysDto.size() != 7){
-            throw new InvalidUpdateException("A atualização de horário de funcionamento deve conter todos os dias da semana.");
-        }
+        openingDaysValidation.validate(openingDaysDto);
 
         store.getOpeningDays().clear();
         for (OpeningHours newOpeningHour : openingDaysDto) {

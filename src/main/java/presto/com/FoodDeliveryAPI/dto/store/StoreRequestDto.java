@@ -2,6 +2,7 @@ package presto.com.FoodDeliveryAPI.dto.store;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import presto.com.FoodDeliveryAPI.entity.Address;
@@ -13,6 +14,7 @@ import java.util.List;
 
 @Getter
 @Setter
+@AllArgsConstructor
 public class StoreRequestDto {
 
     @NotNull(message = "Nome do estabelecimento não deve ser nulo.")
@@ -33,6 +35,5 @@ public class StoreRequestDto {
     private Address address;
 
     @NotNull(message = "Horários de funcionamento não devem ser nulo.")
-    @Size(min = 7, max = 7, message = "A lista deve obter os 7 dias da semana.")
     private List<OpeningHours> openingDays;
 }

@@ -7,7 +7,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import presto.com.FoodDeliveryAPI.entity.User;
-import presto.com.FoodDeliveryAPI.repository.CredentialsRepository;
 import presto.com.FoodDeliveryAPI.repository.UserRepository;
 
 import static org.assertj.core.api.Assertions.assertThat;
