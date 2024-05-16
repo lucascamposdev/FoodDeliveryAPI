@@ -28,7 +28,7 @@ public class AuthController {
         var authentication = manager.authenticate(credentials);
 
         var response = authService.login(authentication, dto);
-        return ResponseEntity.ok(new TokenDto(response));
+        return ResponseEntity.ok(response);
     }
 
     @DeleteMapping("/{id}")

@@ -10,6 +10,8 @@ import java.util.List;
 
 public interface StoreRepository extends JpaRepository<Store, Long> {
 
+    Store findByCredentialsId(Long credentialsId);
+
     @Query("SELECT s FROM Store s WHERE " +
             "6371 * acos(cos(radians(:latitude)) * cos(radians(s.location.latitude)) * " +
             "cos(radians(s.location.longitude) - radians(:longitude)) + sin(radians(:latitude)) * " +
