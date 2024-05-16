@@ -1,6 +1,7 @@
 package presto.com.FoodDeliveryAPI.infra.exceptions;
 
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.BindingResult;
@@ -57,6 +58,12 @@ public class RestExceptionHandler {
         return ResponseEntity.badRequest().body(apiErrorMessage);
     }
 
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<ApiErrorMessage> handleDataIntegrityViolationException(DataIntegrityViolationException ex){
+        ApiErrorMessage apiErrorMessage = new ApiErrorMessage("email já está em uso.");
+        return ResponseEntity.badRequest().body(apiErrorMessage);
+    }
+
     @ExceptionHandler(InvalidPermissionException.class)
     public ResponseEntity<ApiErrorMessage> handleInvalidPermissionException(InvalidPermissionException ex){
         ApiErrorMessage apiErrorMessage = new ApiErrorMessage(ex.getMessage());
@@ -65,12 +72,6 @@ public class RestExceptionHandler {
 
     @ExceptionHandler(InvalidUpdateException.class)
     public ResponseEntity<ApiErrorMessage> handleInvalidUpdateException(InvalidUpdateException ex){
-        ApiErrorMessage apiErrorMessage = new ApiErrorMessage(ex.getMessage());
-        return ResponseEntity.badRequest().body(apiErrorMessage);
-    }
-
-    @ExceptionHandler(DataAlreadyExistsException.class)
-    public ResponseEntity<ApiErrorMessage> handleDataAlreadyExistsException(DataAlreadyExistsException ex){
         ApiErrorMessage apiErrorMessage = new ApiErrorMessage(ex.getMessage());
         return ResponseEntity.badRequest().body(apiErrorMessage);
     }

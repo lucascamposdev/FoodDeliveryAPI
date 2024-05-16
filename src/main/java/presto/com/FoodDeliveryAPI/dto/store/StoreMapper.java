@@ -15,18 +15,24 @@ public class StoreMapper {
         Store newStore = new Store(
                 null,
                 dto.getName(),
-                CredentialsMapper.toEntity(dto.getCredentials().getEmail(), dto.getCredentials().getPassword(), dto.getCredentials().getAccountType()),
-                new Location(dto.getLocation().getLatitude(), dto.getLocation().getLongitude()),
+                null,
+                null,
                 dto.getDeliveryRadius(),
                 null,
                 null);
 
+        var location = new Location(dto.getLocation().getLatitude(), dto.getLocation().getLongitude());
         var address = AddressMapper.toAddressFromStoreRequest(dto);
-        var openingDays = OpeningHoursMapper
-                .toList(newStore, dto);
+        var openingDays = OpeningHoursMapper.toList(newStore, dto);
+        var credentials = CredentialsMapper.toEntity(
+                dto.getCredentials().getEmail(),
+                dto.getCredentials().getPassword(),
+                dto.getCredentials().getAccountType());
 
+        newStore.setLocation(location);
         newStore.setOpeningDays(openingDays);
         newStore.setAddress(address);
+        newStore.setCredentials(credentials);
 
         return newStore;
     }

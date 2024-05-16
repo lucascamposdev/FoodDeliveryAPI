@@ -10,13 +10,20 @@ import presto.com.FoodDeliveryAPI.enums.AccountType;
 public class UserMapper {
 
     public static User toEntity(UserRequestDto dto){
-        return new User(
+        User newUser = new User(
                 null,
                 dto.getName(),
-                CredentialsMapper.toEntity(dto.getCredentials().getEmail(), dto.getCredentials().getPassword(), dto.getCredentials().getAccountType()),
+                null,
                 new Location(dto.getLocation().getLatitude(), dto.getLocation().getLongitude()),
-                AddressMapper.toAddressFromUserRequest(dto)
-        );
+                AddressMapper.toAddressFromUserRequest(dto));
+
+        newUser.setCredentials(
+                CredentialsMapper.toEntity(
+                        dto.getCredentials().getEmail(),
+                        dto.getCredentials().getPassword(),
+                        dto.getCredentials().getAccountType()));
+
+        return newUser;
     }
 
     public static UserResponseDto toResponse(User entity){

@@ -13,6 +13,4 @@ public interface CredentialsRepository extends JpaRepository<Credentials, Long> 
     UserDetails findByEmail(String username);
 
     boolean existsByEmail(String email);
-
-
 }

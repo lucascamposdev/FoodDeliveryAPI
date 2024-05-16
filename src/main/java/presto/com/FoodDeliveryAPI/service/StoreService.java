@@ -12,9 +12,7 @@ import presto.com.FoodDeliveryAPI.dto.store.StoreRequestDto;
 import presto.com.FoodDeliveryAPI.dto.store.StoreUpdateDto;
 import presto.com.FoodDeliveryAPI.entity.*;
 import presto.com.FoodDeliveryAPI.enums.AccountType;
-import presto.com.FoodDeliveryAPI.infra.exceptions.DataAlreadyExistsException;
 import presto.com.FoodDeliveryAPI.infra.exceptions.InvalidUpdateException;
-import presto.com.FoodDeliveryAPI.repository.CredentialsRepository;
 import presto.com.FoodDeliveryAPI.repository.StoreRepository;
 import presto.com.FoodDeliveryAPI.service.validations.NotEqualDaysValidation;
 
@@ -27,18 +25,12 @@ public class StoreService {
     private StoreRepository storeRepository;
 
     @Autowired
-    private CredentialsRepository credentialsRepository;
-
-    @Autowired
     private UtilityService utilityService;
 
     @Autowired
     private NotEqualDaysValidation notEqualDaysValidation;
 
     public Store register(StoreRequestDto dto){
-        if(credentialsRepository.existsByEmail(dto.getCredentials().getEmail())){
-            throw new DataAlreadyExistsException("email já está em uso.");
-        }
 
         notEqualDaysValidation.validate(dto.getOpeningDays());
 

@@ -6,23 +6,13 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import presto.com.FoodDeliveryAPI.entity.Address;
 import presto.com.FoodDeliveryAPI.entity.Credentials;
-import presto.com.FoodDeliveryAPI.entity.Store;
-import presto.com.FoodDeliveryAPI.infra.exceptions.DataAlreadyExistsException;
 import presto.com.FoodDeliveryAPI.infra.exceptions.InvalidPermissionException;
-import presto.com.FoodDeliveryAPI.infra.exceptions.InvalidUpdateException;
 import presto.com.FoodDeliveryAPI.repository.CredentialsRepository;
 
 @Service
 public class UtilityService {
 
-    @Autowired
-    private CredentialsRepository credentialsRepository;
-
     public void updateCredentials(Credentials credentials, Credentials credentialsDto){
-        if(credentialsRepository.existsByEmail(credentialsDto.getEmail())){
-            throw new DataAlreadyExistsException("email já está em uso.");
-        }
-
         if (credentialsDto.getEmail() != null) {
             credentials.setEmail(credentialsDto.getEmail());
         }
