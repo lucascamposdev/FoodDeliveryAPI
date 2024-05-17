@@ -15,7 +15,7 @@ public class openingDaysValidation {
 
     public void validate(List<OpeningHours> list){
         if (list.size() != 7){
-            throw new InvalidRegisterException("A atualização de horário de funcionamento deve conter todos os dias da semana.");
+            throw new InvalidRegisterException("A lista de horário de funcionamento deve conter todos os dias da semana.");
         }
 
         Set<DayOfWeek> seen = new HashSet<>();

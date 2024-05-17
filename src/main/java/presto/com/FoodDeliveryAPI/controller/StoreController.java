@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import presto.com.FoodDeliveryAPI.dto.store.*;
+import presto.com.FoodDeliveryAPI.entity.Store;
 import presto.com.FoodDeliveryAPI.service.StoreService;
 
 @RestController
@@ -24,11 +25,21 @@ public class StoreController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createdResponse);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<StoreResponseDto> findById(@PathVariable Long id){
+        var store = service.findById(id);
+        var storeResponse = StoreMapper.toResponse(store);
+        return ResponseEntity.status(HttpStatus.CREATED).body(storeResponse);
+    }
+
     @GetMapping
-    public ResponseEntity<Page<StoreMinimalResponseDto>> findAll(Pageable page){
-        var list = service.findAll(page);
+    public ResponseEntity<Page<StoreMinimalResponseDto>> search(
+            @RequestParam(value = "query") String query,
+            Pageable pageable) {
+
+        var list = service.search(query, pageable);
         var listResponse = list.map(StoreMapper::toMinimalResponse);
-        return ResponseEntity.status(HttpStatus.CREATED).body(listResponse);
+        return ResponseEntity.ok(listResponse);
     }
 
     @GetMapping("/delivery")

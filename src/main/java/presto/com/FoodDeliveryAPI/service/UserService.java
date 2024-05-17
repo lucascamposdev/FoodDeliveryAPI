@@ -22,13 +22,9 @@ public class UserService {
     private UtilityService utilityService;
 
     public User register(UserRequestDto dto){
-        Credentials registerCredentials = dto.getCredentials();
-
-        registerCredentials.setAccountType(AccountType.USER);
-        registerCredentials.setPassword(
-                new BCryptPasswordEncoder().encode(registerCredentials.getPassword()));
-
-        dto.setCredentials(registerCredentials);
+        dto.getCredentials().setAccountType(AccountType.USER);
+        dto.getCredentials().setPassword(
+                new BCryptPasswordEncoder().encode(dto.getCredentials().getPassword()));
 
         User newUser = UserMapper.toEntity(dto);
         return userRepository.save(newUser);

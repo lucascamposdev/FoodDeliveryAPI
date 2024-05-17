@@ -9,6 +9,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import presto.com.FoodDeliveryAPI.dto.store.StoreMapper;
 import presto.com.FoodDeliveryAPI.dto.store.StoreRequestDto;
+import presto.com.FoodDeliveryAPI.dto.store.StoreResponseDto;
 import presto.com.FoodDeliveryAPI.dto.store.StoreUpdateDto;
 import presto.com.FoodDeliveryAPI.entity.*;
 import presto.com.FoodDeliveryAPI.enums.AccountType;
@@ -30,23 +31,24 @@ public class StoreService {
     private openingDaysValidation openingDaysValidation;
 
     public Store register(StoreRequestDto dto){
-
         openingDaysValidation.validate(dto.getOpeningDays());
 
-        Credentials registerCredentials = dto.getCredentials();
-
-        registerCredentials.setAccountType(AccountType.STORE);
-        registerCredentials.setPassword(
-                new BCryptPasswordEncoder().encode(registerCredentials.getPassword()));
-
-        dto.setCredentials(registerCredentials);
+        dto.getCredentials().setAccountType(AccountType.STORE);
+        dto.getCredentials().setPassword(
+                new BCryptPasswordEncoder().encode(dto.getCredentials().getPassword()));
 
         Store newStore = StoreMapper.toEntity(dto);
         return storeRepository.save(newStore);
     }
 
-    public Page<Store> findAll(Pageable page){
-        return storeRepository.findAll(page);
+    public Store findById(Long id){
+        return storeRepository
+                .findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Nenhuma loja associada a este Id foi encontrada."));
+    }
+
+    public Page<Store> search(String query, Pageable page){
+        return storeRepository.findByNameContainingIgnoreCase(query, page);
     }
 
     public Page<Store> findWhoDelivers(double latitude, double longitude, Pageable page){
@@ -60,7 +62,7 @@ public class StoreService {
     public Store update(Long id, StoreUpdateDto dto){
         Store store = storeRepository
                 .findById(id)
-                .orElseThrow(() -> new EntityNotFoundException(("Nenhuma conta associada a este Id foi encontrada.")));
+                .orElseThrow(() -> new EntityNotFoundException(("Nenhuma loja associada a este Id foi encontrada.")));
 
         utilityService.checkPermission(store.getCredentials().getId());
 
