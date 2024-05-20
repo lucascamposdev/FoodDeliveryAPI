@@ -22,6 +22,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
+import static org.postgresql.hostchooser.HostRequirement.any;
 import static presto.com.FoodDeliveryAPI.common.StoreConstant.*;
 import static presto.com.FoodDeliveryAPI.common.UserConstant.USER;
 import static presto.com.FoodDeliveryAPI.common.UserConstant.USER_UPDATE_DTO;
@@ -165,7 +166,7 @@ class StoreServiceTest {
             storeList.add(STORE);
             Page<Store> page = new PageImpl<>(storeList);
 
-            when(storeRepository.findAllWhoDeliversAtThisLocation(anyDouble(), anyDouble(), pageRequest)).thenReturn(page);
+            when(storeRepository.findAllWhoDeliversAtThisLocation(anyDouble(), anyDouble(), any())).thenReturn(page);
 
             Page<Store> foundPage = storeService.findWhoDelivers(latitude, longitude, pageRequest);
 
@@ -179,7 +180,7 @@ class StoreServiceTest {
             double longitude = -678.910;
             Pageable pageRequest = Pageable.ofSize(20).withPage(0);
 
-            when(storeRepository.findAllWhoDeliversAtThisLocation(anyDouble(), anyDouble(), pageRequest)).thenReturn(Page.empty());
+            when(storeRepository.findAllWhoDeliversAtThisLocation(anyDouble(), anyDouble(), any())).thenReturn(Page.empty());
 
             Page<Store> foundPage = storeService.findWhoDelivers(latitude, longitude, pageRequest);
 

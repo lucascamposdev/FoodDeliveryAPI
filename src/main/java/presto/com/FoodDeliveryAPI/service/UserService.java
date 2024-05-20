@@ -22,7 +22,6 @@ public class UserService {
     private UtilityService utilityService;
 
     public User register(UserRequestDto dto){
-        dto.getCredentials().setAccountType(AccountType.USER);
         dto.getCredentials().setPassword(
                 new BCryptPasswordEncoder().encode(dto.getCredentials().getPassword()));
 

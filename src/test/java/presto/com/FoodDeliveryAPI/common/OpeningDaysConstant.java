@@ -19,6 +19,16 @@ public class OpeningDaysConstant {
             new OpeningHours(7L, DayOfWeek.SUNDAY, LocalTime.parse("10:00"), LocalTime.parse("17:00"), new Store())
     );
 
+    public static final List<OpeningHours> NEW_OPENING_DAYS = Arrays.asList(
+            new OpeningHours(null, DayOfWeek.MONDAY, LocalTime.parse("10:00"), LocalTime.parse("17:00"), new Store()),
+            new OpeningHours(null, DayOfWeek.TUESDAY, LocalTime.parse("10:00"), LocalTime.parse("17:00"), new Store()),
+            new OpeningHours(null, DayOfWeek.WEDNESDAY, LocalTime.parse("10:00"), LocalTime.parse("17:00"), new Store()),
+            new OpeningHours(null, DayOfWeek.THURSDAY, LocalTime.parse("10:00"), LocalTime.parse("17:00"), new Store()),
+            new OpeningHours(null, DayOfWeek.FRIDAY, LocalTime.parse("10:00"), LocalTime.parse("17:00"), new Store()),
+            new OpeningHours(null, DayOfWeek.SATURDAY, LocalTime.parse("10:00"), LocalTime.parse("17:00"), new Store()),
+            new OpeningHours(null, DayOfWeek.SUNDAY, LocalTime.parse("10:00"), LocalTime.parse("17:00"), new Store())
+    );
+
     public static final List<OpeningHours> INVALID_OPENING_DAYS = Arrays.asList(
             new OpeningHours(1L, DayOfWeek.MONDAY, LocalTime.parse("10:00"), LocalTime.parse("17:00"), new Store()),
             new OpeningHours(1L, DayOfWeek.SUNDAY, LocalTime.parse("10:00"), LocalTime.parse("17:00"), new Store())

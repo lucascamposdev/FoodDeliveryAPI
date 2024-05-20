@@ -17,6 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static presto.com.FoodDeliveryAPI.common.AddressConstant.ADDRESS;
 import static presto.com.FoodDeliveryAPI.common.LocationConstant.LOCATION;
+import static presto.com.FoodDeliveryAPI.common.OpeningDaysConstant.OPENING_DAYS;
 import static presto.com.FoodDeliveryAPI.common.StoreConstant.STORE;
 
 @DataJpaTest
@@ -32,7 +33,7 @@ class StoreRepositoryTest {
     void findAllWhoDelivers_WithCloseLocation_ReturnsStore() {
         Store store = new Store();
         store.setName("Store");
-        store.setLocation(LOCATION);
+        store.setLocation(new Location(-123.456, 456.789));
         store.setAddress(ADDRESS);
         store.setDeliveryRadius(10);
 

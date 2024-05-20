@@ -29,7 +29,7 @@ public class StoreController {
     public ResponseEntity<StoreResponseDto> findById(@PathVariable Long id){
         var store = service.findById(id);
         var storeResponse = StoreMapper.toResponse(store);
-        return ResponseEntity.status(HttpStatus.CREATED).body(storeResponse);
+        return ResponseEntity.ok(storeResponse);
     }
 
     @GetMapping
@@ -50,14 +50,14 @@ public class StoreController {
 
         var list = service.findWhoDelivers(latitude, longitude, page);
         var listResponse = list.map(StoreMapper::toMinimalResponse);
-        return ResponseEntity.status(HttpStatus.CREATED).body(listResponse);
+        return ResponseEntity.ok().body(listResponse);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<StoreResponseDto> update(@PathVariable Long id, @RequestBody StoreUpdateDto dto){
         var updatedStore = service.update(id, dto);
         var updatedResponse = StoreMapper.toResponse(updatedStore);
-        return ResponseEntity.status(HttpStatus.OK).body(updatedResponse);
+        return ResponseEntity.ok().body(updatedResponse);
     }
 
 }

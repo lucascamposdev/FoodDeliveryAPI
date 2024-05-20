@@ -19,7 +19,7 @@ public class UserConstant {
 
     public static final UserRequestDto USER_REQUEST_DTO = new UserRequestDto(
             "Person",
-            CredentialsConstant.USER_CREDENTIALS,
+            CredentialsConstant.USER_CREDENTIALS_DTO,
             LocationConstant.LOCATION,
             AddressConstant.ADDRESS
     );

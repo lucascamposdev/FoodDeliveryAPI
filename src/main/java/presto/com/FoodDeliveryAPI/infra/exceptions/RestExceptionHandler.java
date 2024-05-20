@@ -68,7 +68,7 @@ public class RestExceptionHandler {
     @ExceptionHandler(InvalidPermissionException.class)
     public ResponseEntity<ApiErrorMessage> handleInvalidPermissionException(InvalidPermissionException ex){
         ApiErrorMessage apiErrorMessage = new ApiErrorMessage(ex.getMessage());
-        return ResponseEntity.badRequest().body(apiErrorMessage);
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(apiErrorMessage);
     }
 
     @ExceptionHandler(InvalidUpdateException.class)

@@ -21,7 +21,7 @@ public class UserMapper {
                 CredentialsMapper.toEntity(
                         dto.getCredentials().getEmail(),
                         dto.getCredentials().getPassword(),
-                        dto.getCredentials().getAccountType()));
+                        AccountType.USER));
 
         return newUser;
     }

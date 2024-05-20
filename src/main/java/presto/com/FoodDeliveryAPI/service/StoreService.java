@@ -34,7 +34,6 @@ public class StoreService {
     public Store register(StoreRequestDto dto){
         openingDaysValidation.validate(dto.getOpeningDays());
 
-        dto.getCredentials().setAccountType(AccountType.STORE);
         dto.getCredentials().setPassword(
                 new BCryptPasswordEncoder().encode(dto.getCredentials().getPassword()));
 

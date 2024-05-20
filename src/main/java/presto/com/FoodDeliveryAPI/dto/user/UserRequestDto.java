@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import presto.com.FoodDeliveryAPI.dto.credentials.CredentialsRequestDto;
 import presto.com.FoodDeliveryAPI.entity.Address;
 import presto.com.FoodDeliveryAPI.entity.Credentials;
 import presto.com.FoodDeliveryAPI.entity.Location;
@@ -20,7 +21,7 @@ public class UserRequestDto {
 
     @NotNull(message = "Credenciais não devem ser nulo.")
     @Valid
-    private Credentials credentials;
+    private CredentialsRequestDto credentials;
 
     @NotNull(message = "Localização não deve ser nulo.")
     private Location location;

@@ -27,7 +27,7 @@ public class StoreMapper {
         var credentials = CredentialsMapper.toEntity(
                 dto.getCredentials().getEmail(),
                 dto.getCredentials().getPassword(),
-                dto.getCredentials().getAccountType());
+                AccountType.STORE);
 
         newStore.setLocation(location);
         newStore.setOpeningDays(openingDays);
