@@ -2,10 +2,7 @@ package presto.com.FoodDeliveryAPI.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import presto.com.FoodDeliveryAPI.enums.AccountType;
 
 import java.util.List;
@@ -16,6 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @Setter
 @Getter
+@EqualsAndHashCode(of = "id")
 public class Store {
 
     @Id

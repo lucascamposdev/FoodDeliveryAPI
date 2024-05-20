@@ -33,7 +33,7 @@ public class UserService {
     public User update(Long id, UserUpdateDto dto){
         User user = userRepository
                 .findById(id)
-                .orElseThrow(() -> new EntityNotFoundException(("Nenhuma conta associada a este Id foi encontrada.")));
+                .orElseThrow(() -> new EntityNotFoundException(("Nenhum usuário associado a este Id foi encontrado.")));
 
         utilityService.checkPermission(user.getCredentials().getId());
 

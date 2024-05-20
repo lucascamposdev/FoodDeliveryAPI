@@ -9,9 +9,10 @@ import presto.com.FoodDeliveryAPI.entity.Credentials;
 import presto.com.FoodDeliveryAPI.infra.exceptions.InvalidPermissionException;
 import presto.com.FoodDeliveryAPI.repository.CredentialsRepository;
 
+import java.util.Objects;
+
 @Service
 public class UtilityService {
-
     public void updateCredentials(Credentials credentials, Credentials credentialsDto){
         if (credentialsDto.getEmail() != null) {
             credentials.setEmail(credentialsDto.getEmail());
@@ -49,7 +50,7 @@ public class UtilityService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Long currentAuthenticatedId = ((Credentials) authentication.getPrincipal()).getId();
 
-        if (id != currentAuthenticatedId) {
+        if (!Objects.equals(id, currentAuthenticatedId)) {
             throw new InvalidPermissionException("Você não tem permissão para acessar este perfil.");
         }
     }

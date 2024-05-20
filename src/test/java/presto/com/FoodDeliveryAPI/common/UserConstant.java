@@ -2,6 +2,7 @@ package presto.com.FoodDeliveryAPI.common;
 
 import org.checkerframework.checker.units.qual.C;
 import presto.com.FoodDeliveryAPI.dto.user.UserRequestDto;
+import presto.com.FoodDeliveryAPI.dto.user.UserUpdateDto;
 import presto.com.FoodDeliveryAPI.entity.Address;
 import presto.com.FoodDeliveryAPI.entity.Credentials;
 import presto.com.FoodDeliveryAPI.entity.Location;
@@ -28,5 +29,12 @@ public class UserConstant {
             null,
             null,
             null
+    );
+
+    public static final UserUpdateDto USER_UPDATE_DTO = new UserUpdateDto(
+            "John",
+            CredentialsConstant.USER_CREDENTIALS,
+            LocationConstant.LOCATION,
+            AddressConstant.ADDRESS
     );
 }

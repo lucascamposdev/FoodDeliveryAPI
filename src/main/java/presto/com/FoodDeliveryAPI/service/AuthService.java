@@ -39,25 +39,25 @@ public class AuthService implements UserDetailsService {
     }
 
     public TokenDto login(Authentication authentication, AuthLoginDto dto){
-
         Credentials authenticated = (Credentials) authentication.getPrincipal();
-        TokenDto tokenDto = new TokenDto();
 
         var token = tokenService.generateToken(authenticated);
+        var objectId = getObjectId(authenticated);
 
+        return new TokenDto(
+                authenticated.getAccountType(),
+                authenticated.getId(),
+                objectId,
+                token
+        );
+    }
+
+    public Long getObjectId (Credentials authenticated){
         if(authenticated.getAccountType() == AccountType.USER){
-            var userId = userRepository.findByCredentialsId(authenticated.getId());
-            tokenDto.setObjectId(userId.getId());
+            return userRepository.findByCredentialsId(authenticated.getId()).getId();
         }else{
-            var storeId = storeRepository.findByCredentialsId(authenticated.getId());
-            tokenDto.setObjectId(storeId.getId());
+            return storeRepository.findByCredentialsId(authenticated.getId()).getId();
         }
-
-        tokenDto.setToken(token);
-        tokenDto.setAccountId(authenticated.getId());
-        tokenDto.setAccountType(authenticated.getAccountType());
-
-        return tokenDto;
     }
 
     public void deleteAccount(Long id){

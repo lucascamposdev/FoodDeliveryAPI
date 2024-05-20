@@ -8,4 +8,6 @@ public class LocationConstant {
             -123.456,
             456.789
     );
+
+
 }

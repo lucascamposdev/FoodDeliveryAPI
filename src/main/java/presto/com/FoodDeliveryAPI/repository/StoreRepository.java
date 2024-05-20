@@ -19,6 +19,7 @@ public interface StoreRepository extends JpaRepository<Store, Long> {
             "6371 * acos(cos(radians(:latitude)) * cos(radians(s.location.latitude)) * " +
             "cos(radians(s.location.longitude) - radians(:longitude)) + sin(radians(:latitude)) * " +
             "sin(radians(s.location.latitude))) <= s.deliveryRadius")
-    List<Store> findAllWhoDeliversAtThisLocation(@Param("latitude") double latitude,
-                                                 @Param("longitude") double longitude);
+    Page<Store> findAllWhoDeliversAtThisLocation(@Param("latitude") double latitude,
+                                                 @Param("longitude") double longitude,
+                                                 Pageable page);
 }

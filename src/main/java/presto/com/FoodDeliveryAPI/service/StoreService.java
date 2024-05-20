@@ -16,6 +16,7 @@ import presto.com.FoodDeliveryAPI.enums.AccountType;
 import presto.com.FoodDeliveryAPI.repository.StoreRepository;
 import presto.com.FoodDeliveryAPI.service.validations.openingDaysValidation;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -52,11 +53,7 @@ public class StoreService {
     }
 
     public Page<Store> findWhoDelivers(double latitude, double longitude, Pageable page){
-        List<Store> list = storeRepository.findAllWhoDeliversAtThisLocation(latitude, longitude);
-
-        int start = (int) page.getOffset();
-        int end = Math.min((start + page.getPageSize()), list.size());
-        return new PageImpl<>(list.subList(start, end), page, list.size());
+        return storeRepository.findAllWhoDeliversAtThisLocation(latitude, longitude, page);
     }
 
     public Store update(Long id, StoreUpdateDto dto){
@@ -91,7 +88,8 @@ public class StoreService {
     private void updateOpeningHours(Store store, List<OpeningHours> openingDaysDto) {
         openingDaysValidation.validate(openingDaysDto);
 
-        store.getOpeningDays().clear();
+        List<OpeningHours> openingDaysCopy = new ArrayList<>();
+
         for (OpeningHours newOpeningHour : openingDaysDto) {
             OpeningHours openingHours = new OpeningHours(
                     null,
@@ -101,7 +99,11 @@ public class StoreService {
                     store
             );
 
-            store.getOpeningDays().add(openingHours);
+            openingDaysCopy.add(openingHours);
         }
+
+        store.setOpeningDays(openingDaysCopy);
     }
+
+
 }
