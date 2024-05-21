@@ -29,8 +29,7 @@ class UtilityServiceTest {
     private Authentication authentication;
 
     @Nested
-    class checkPermissions{
-
+    class checkPermission{
         @Test
         void checkPermission_withValidPermission_doesNotThrowException(){
             Long requestId = 1L;
