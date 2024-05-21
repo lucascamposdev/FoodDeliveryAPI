@@ -1,5 +1,6 @@
 package presto.com.FoodDeliveryAPI.controller;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +17,7 @@ import presto.com.FoodDeliveryAPI.service.ProductService;
 
 @RestController
 @RequestMapping("api/v1/products")
+@SecurityRequirement(name = "bearer-key")
 public class ProductController {
 
     @Autowired

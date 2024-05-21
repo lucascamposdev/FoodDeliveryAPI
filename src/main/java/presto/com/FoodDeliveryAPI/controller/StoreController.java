@@ -1,5 +1,6 @@
 package presto.com.FoodDeliveryAPI.controller;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -26,6 +27,7 @@ public class StoreController {
     }
 
     @GetMapping("/{id}")
+    @SecurityRequirement(name = "bearer-key")
     public ResponseEntity<StoreResponseDto> findById(@PathVariable Long id){
         var store = service.findById(id);
         var storeResponse = StoreMapper.toResponse(store);
@@ -33,6 +35,7 @@ public class StoreController {
     }
 
     @GetMapping
+    @SecurityRequirement(name = "bearer-key")
     public ResponseEntity<Page<StoreMinimalResponseDto>> search(
             @RequestParam(value = "query") String query,
             Pageable pageable) {
@@ -43,6 +46,7 @@ public class StoreController {
     }
 
     @GetMapping("/delivery")
+    @SecurityRequirement(name = "bearer-key")
     public ResponseEntity<Page<StoreMinimalResponseDto>> findWhoDelivers(
             Pageable page,
             @RequestParam double latitude,
@@ -54,6 +58,7 @@ public class StoreController {
     }
 
     @PutMapping("/{id}")
+    @SecurityRequirement(name = "bearer-key")
     public ResponseEntity<StoreResponseDto> update(@PathVariable Long id, @RequestBody StoreUpdateDto dto){
         var updatedStore = service.update(id, dto);
         var updatedResponse = StoreMapper.toResponse(updatedStore);

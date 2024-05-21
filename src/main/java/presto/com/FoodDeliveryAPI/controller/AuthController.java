@@ -1,5 +1,6 @@
 package presto.com.FoodDeliveryAPI.controller;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,6 +33,7 @@ public class AuthController {
     }
 
     @DeleteMapping("/{id}")
+    @SecurityRequirement(name = "bearer-key")
     public ResponseEntity<?> delete(@PathVariable Long id){
         authService.deleteAccount(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
