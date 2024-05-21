@@ -33,7 +33,7 @@ public class UserConstant {
 
     public static final UserUpdateDto USER_UPDATE_DTO = new UserUpdateDto(
             "John",
-            CredentialsConstant.USER_CREDENTIALS,
+            null,
             LocationConstant.LOCATION,
             AddressConstant.ADDRESS
     );

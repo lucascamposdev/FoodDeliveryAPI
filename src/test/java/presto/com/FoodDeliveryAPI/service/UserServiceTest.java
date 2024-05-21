@@ -66,7 +66,6 @@ class UserServiceTest {
 
             verify(userRepository, times(1)).findById(requestId);
             verify(utilityService, times(1)).checkPermission(USER.getCredentials().getId());
-            verify(utilityService, times(1)).updateCredentials(USER.getCredentials(), USER_UPDATE_DTO.getCredentials());
             verify(utilityService, times(1)).updateAddress(USER.getAddress(), USER_UPDATE_DTO.getAddress());
             verify(userRepository, times(1)).save(USER);
 

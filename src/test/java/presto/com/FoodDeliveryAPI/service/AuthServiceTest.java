@@ -7,6 +7,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.core.Authentication;
+import presto.com.FoodDeliveryAPI.common.StoreConstant;
 import presto.com.FoodDeliveryAPI.dto.token.TokenDto;
 import presto.com.FoodDeliveryAPI.entity.Credentials;
 import presto.com.FoodDeliveryAPI.enums.AccountType;
@@ -14,8 +15,6 @@ import presto.com.FoodDeliveryAPI.infra.security.TokenService;
 import presto.com.FoodDeliveryAPI.repository.CredentialsRepository;
 import presto.com.FoodDeliveryAPI.repository.StoreRepository;
 import presto.com.FoodDeliveryAPI.repository.UserRepository;
-
-import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;

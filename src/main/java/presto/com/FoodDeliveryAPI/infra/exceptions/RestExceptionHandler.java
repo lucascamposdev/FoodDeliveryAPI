@@ -5,6 +5,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -69,6 +70,11 @@ public class RestExceptionHandler {
     public ResponseEntity<ApiErrorMessage> handleInvalidPermissionException(InvalidPermissionException ex){
         ApiErrorMessage apiErrorMessage = new ApiErrorMessage(ex.getMessage());
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(apiErrorMessage);
+    }
+
+    @ExceptionHandler(BadCredentialsException.class)
+    public ResponseEntity<String> handleBadCredentialsException(BadCredentialsException ex) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciais incorretas.");
     }
 
     @ExceptionHandler(InvalidUpdateException.class)

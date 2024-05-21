@@ -1,11 +1,8 @@
 package presto.com.FoodDeliveryAPI.common;
 
-import presto.com.FoodDeliveryAPI.dto.store.StoreMinimalResponseDto;
 import presto.com.FoodDeliveryAPI.dto.store.StoreRequestDto;
 import presto.com.FoodDeliveryAPI.dto.store.StoreUpdateDto;
-import presto.com.FoodDeliveryAPI.dto.user.UserRequestDto;
 import presto.com.FoodDeliveryAPI.entity.Store;
-import presto.com.FoodDeliveryAPI.entity.User;
 
 public class StoreConstant {
     public static final Store STORE = new Store(
@@ -41,7 +38,7 @@ public class StoreConstant {
             null,
             LocationConstant.LOCATION,
             10,
-            null,
+            AddressConstant.ADDRESS,
             OpeningDaysConstant.OPENING_DAYS
     );
 

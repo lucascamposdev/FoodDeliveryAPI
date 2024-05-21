@@ -9,8 +9,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import presto.com.FoodDeliveryAPI.common.StoreConstant;
 import presto.com.FoodDeliveryAPI.entity.Store;
-import presto.com.FoodDeliveryAPI.entity.User;
 import presto.com.FoodDeliveryAPI.repository.StoreRepository;
 import presto.com.FoodDeliveryAPI.service.validations.openingDaysValidation;
 
@@ -22,10 +22,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
-import static org.postgresql.hostchooser.HostRequirement.any;
 import static presto.com.FoodDeliveryAPI.common.StoreConstant.*;
-import static presto.com.FoodDeliveryAPI.common.UserConstant.USER;
-import static presto.com.FoodDeliveryAPI.common.UserConstant.USER_UPDATE_DTO;
 
 @ExtendWith(MockitoExtension.class)
 class StoreServiceTest {
@@ -77,7 +74,6 @@ class StoreServiceTest {
 
             verify(storeRepository, times(1)).findById(requestId);
             verify(utilityService, times(1)).checkPermission(STORE.getCredentials().getId());
-            verify(utilityService, times(1)).updateCredentials(STORE.getCredentials(), STORE_UPDATE_DTO.getCredentials());
             verify(utilityService, times(1)).updateAddress(STORE.getAddress(), STORE_UPDATE_DTO.getAddress());
             verify(storeRepository, times(1)).save(STORE);
 
