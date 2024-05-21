@@ -17,7 +17,7 @@ public class ProductUpdateDto {
 
     private String description;
 
-    private BigDecimal value;
+    private BigDecimal price;
 
     @NotNull(message = "Id do produto é obrigatório.")
     private Long productId;

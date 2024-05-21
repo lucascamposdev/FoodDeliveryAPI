@@ -21,7 +21,7 @@ public class ProductRequestDto {
     private String description;
 
     @NotNull(message = "Valor do produto é obrigatório.")
-    private BigDecimal value;
+    private BigDecimal price;
 
     @NotNull(message = "Id da loja é obrigatório.")
     private Long storeId;

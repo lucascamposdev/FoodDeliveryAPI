@@ -2,7 +2,10 @@ package presto.com.FoodDeliveryAPI.common;
 
 import presto.com.FoodDeliveryAPI.dto.store.StoreRequestDto;
 import presto.com.FoodDeliveryAPI.dto.store.StoreUpdateDto;
+import presto.com.FoodDeliveryAPI.entity.Product;
 import presto.com.FoodDeliveryAPI.entity.Store;
+
+import java.util.ArrayList;
 
 public class StoreConstant {
     public static final Store STORE = new Store(
@@ -13,7 +16,7 @@ public class StoreConstant {
             20,
             AddressConstant.ADDRESS,
             OpeningDaysConstant.OPENING_DAYS,
-            null
+            new ArrayList<>()
     );
 
     public static final StoreRequestDto STORE_REQUEST_DTO = new StoreRequestDto(

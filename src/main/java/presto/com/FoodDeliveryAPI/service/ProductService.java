@@ -53,8 +53,8 @@ public class ProductService {
         if(dto.getDescription() != null){
             product.setDescription(dto.getDescription());
         }
-        if(dto.getValue() != null){
-            product.setValue(dto.getValue());
+        if(dto.getPrice() != null){
+            product.setPrice(dto.getPrice());
         }
 
         return productRepository.save(product);

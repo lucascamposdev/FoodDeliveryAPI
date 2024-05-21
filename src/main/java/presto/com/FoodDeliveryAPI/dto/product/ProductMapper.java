@@ -14,7 +14,7 @@ public class ProductMapper {
                 entity.getId(),
                 entity.getName(),
                 entity.getDescription(),
-                entity.getValue()
+                entity.getPrice()
         );
     }
     public static List<Product> toList(Store store){
@@ -25,7 +25,7 @@ public class ProductMapper {
                     product.getId(),
                     product.getName(),
                     product.getDescription(),
-                    product.getValue(),
+                    product.getPrice(),
                     store));
         }
         return list;
@@ -36,7 +36,7 @@ public class ProductMapper {
                 null,
                 dto.getName(),
                 dto.getDescription(),
-                dto.getValue(),
+                dto.getPrice(),
                store
         );
     }
