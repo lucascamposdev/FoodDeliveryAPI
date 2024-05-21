@@ -23,6 +23,6 @@ public class ProductRequestDto {
     @NotNull(message = "Valor do produto é obrigatório.")
     private BigDecimal value;
 
-    @ManyToOne
-    private Store store;
+    @NotNull(message = "Id da loja é obrigatório.")
+    private Long storeId;
 }

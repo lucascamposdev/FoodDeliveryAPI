@@ -8,7 +8,6 @@ import presto.com.FoodDeliveryAPI.entity.Store;
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
 public class OpeningHoursMapper {
 
     public static List<OpeningHours> toList(Store store, StoreRequestDto dto){
