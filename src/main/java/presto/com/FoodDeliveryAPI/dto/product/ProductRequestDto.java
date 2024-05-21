@@ -1,10 +1,12 @@
 package presto.com.FoodDeliveryAPI.dto.product;
 
+import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import presto.com.FoodDeliveryAPI.entity.Store;
 
 import java.math.BigDecimal;
 
@@ -20,4 +22,7 @@ public class ProductRequestDto {
 
     @NotNull(message = "Valor do produto é obrigatório.")
     private BigDecimal value;
+
+    @ManyToOne
+    private Store store;
 }
