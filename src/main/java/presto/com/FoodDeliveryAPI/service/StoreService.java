@@ -13,11 +13,15 @@ import presto.com.FoodDeliveryAPI.dto.store.StoreResponseDto;
 import presto.com.FoodDeliveryAPI.dto.store.StoreUpdateDto;
 import presto.com.FoodDeliveryAPI.entity.*;
 import presto.com.FoodDeliveryAPI.enums.AccountType;
+import presto.com.FoodDeliveryAPI.enums.DayOfWeek;
 import presto.com.FoodDeliveryAPI.repository.StoreRepository;
 import presto.com.FoodDeliveryAPI.service.validations.openingDaysValidation;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Service
 public class StoreService {
@@ -87,21 +91,17 @@ public class StoreService {
     private void updateOpeningHours(Store store, List<OpeningHours> openingDaysDto) {
         openingDaysValidation.validate(openingDaysDto);
 
-        List<OpeningHours> openingDaysCopy = new ArrayList<>();
+        Map<DayOfWeek, OpeningHours> existingOpeningHoursMap = store.getOpeningDays().stream()
+                .collect(Collectors.toMap(OpeningHours::getDayOfWeek, Function.identity()));
 
         for (OpeningHours newOpeningHour : openingDaysDto) {
-            OpeningHours openingHours = new OpeningHours(
-                    null,
-                    newOpeningHour.getDayOfWeek(),
-                    newOpeningHour.getOpening(),
-                    newOpeningHour.getClosing(),
-                    store
-            );
+            OpeningHours existingOpeningHour = existingOpeningHoursMap.get(newOpeningHour.getDayOfWeek());
 
-            openingDaysCopy.add(openingHours);
+            if (existingOpeningHour != null) {
+                existingOpeningHour.setOpening(newOpeningHour.getOpening());
+                existingOpeningHour.setClosing(newOpeningHour.getClosing());
+            }
         }
-
-        store.setOpeningDays(openingDaysCopy);
     }
 
 

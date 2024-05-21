@@ -7,6 +7,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.test.context.ActiveProfiles;
 import presto.com.FoodDeliveryAPI.entity.Location;
 import presto.com.FoodDeliveryAPI.entity.Store;
 
@@ -14,6 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static presto.com.FoodDeliveryAPI.common.AddressConstant.ADDRESS;
 
 @DataJpaTest
+@ActiveProfiles("test")
 class StoreRepositoryTest {
 
     @Autowired
@@ -46,6 +48,7 @@ class StoreRepositoryTest {
         store.setName("Store");
         store.setLocation(new Location(789.101,-123.456));
         store.setAddress(ADDRESS);
+        store.setProducts(null);
         store.setDeliveryRadius(10);
 
         testEntityManager.persist(store);

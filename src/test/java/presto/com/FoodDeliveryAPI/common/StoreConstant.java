@@ -12,7 +12,8 @@ public class StoreConstant {
             LocationConstant.LOCATION,
             20,
             AddressConstant.ADDRESS,
-            OpeningDaysConstant.OPENING_DAYS
+            OpeningDaysConstant.OPENING_DAYS,
+            null
     );
 
     public static final StoreRequestDto STORE_REQUEST_DTO = new StoreRequestDto(
