@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import presto.com.FoodDeliveryAPI.dto.product.ProductMapper;
 import presto.com.FoodDeliveryAPI.dto.product.ProductRequestDto;
 import presto.com.FoodDeliveryAPI.dto.product.ProductResponseDto;
+import presto.com.FoodDeliveryAPI.dto.product.ProductUpdateDto;
 import presto.com.FoodDeliveryAPI.dto.store.StoreMapper;
 import presto.com.FoodDeliveryAPI.dto.store.StoreRequestDto;
 import presto.com.FoodDeliveryAPI.dto.store.StoreResponseDto;
@@ -25,6 +26,13 @@ public class ProductController {
         var createdProduct = productService.register(dto);
         var createdResponse = ProductMapper.toResponse(createdProduct);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdResponse);
+    }
+
+    @PutMapping
+    public ResponseEntity<ProductResponseDto> update(@RequestBody @Valid ProductUpdateDto dto){
+        var updatedProduct = productService.update(dto);
+        var createdResponse = ProductMapper.toResponse(updatedProduct);
+        return ResponseEntity.status(HttpStatus.OK).body(createdResponse);
     }
 
 }
