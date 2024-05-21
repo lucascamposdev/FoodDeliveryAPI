@@ -40,11 +40,12 @@ public class ProductService {
         return productRepository.save(newProduct);
     }
 
-    public Product update(ProductUpdateDto dto){
-        Product product = productRepository.findById(dto.getProductId())
-                .orElseThrow(() -> new EntityNotFoundException("Nenhuma loja associada a este Id foi encontrada."));
 
-        utilityService.checkPermission(product.getStore().getCredentials().getId());
+        public Product update(ProductUpdateDto dto){
+            Product product = productRepository.findById(dto.getProductId())
+                    .orElseThrow(() -> new EntityNotFoundException("Nenhum produto associado a este Id foi encontrado."));
+
+            utilityService.checkPermission(product.getStore().getCredentials().getId());
 
         if(dto.getName() != null){
             product.setName(dto.getName());
@@ -56,6 +57,15 @@ public class ProductService {
             product.setValue(dto.getValue());
         }
 
-        return product;
+        return productRepository.save(product);
+    }
+
+    public void delete (Long id){
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Nenhum produto associado a este Id foi encontrado."));
+
+        utilityService.checkPermission(product.getStore().getCredentials().getId());
+
+        productRepository.deleteById(id);
     }
 }
