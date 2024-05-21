@@ -4,11 +4,11 @@ import org.springframework.stereotype.Component;
 import presto.com.FoodDeliveryAPI.dto.address.AddressMapper;
 import presto.com.FoodDeliveryAPI.dto.credentials.CredentialsMapper;
 import presto.com.FoodDeliveryAPI.dto.openinghours.OpeningHoursMapper;
+import presto.com.FoodDeliveryAPI.dto.product.ProductMapper;
 import presto.com.FoodDeliveryAPI.entity.Location;
 import presto.com.FoodDeliveryAPI.entity.Store;
 import presto.com.FoodDeliveryAPI.enums.AccountType;
 
-@Component
 public class StoreMapper {
 
     public static Store toEntity(StoreRequestDto dto){
@@ -18,6 +18,7 @@ public class StoreMapper {
                 null,
                 null,
                 dto.getDeliveryRadius(),
+                null,
                 null,
                 null);
 
@@ -53,6 +54,7 @@ public class StoreMapper {
                 entity.getDeliveryRadius(),
                 new Location(entity.getLocation().getLatitude(), entity.getLocation().getLongitude()),
                 AddressMapper.toAddressFromStoreEntity(entity),
+                ProductMapper.toList(entity),
                 OpeningHoursMapper.toList(entity));
     }
 

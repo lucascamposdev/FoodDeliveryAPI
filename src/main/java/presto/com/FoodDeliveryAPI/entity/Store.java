@@ -35,4 +35,8 @@ public class Store {
     @OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<OpeningHours> openingDays;
+
+    @OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private List<Product> products;
 }
