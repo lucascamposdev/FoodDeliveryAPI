@@ -19,7 +19,7 @@ public class SpringDocConfigurations {
                                 new SecurityScheme().type(SecurityScheme.Type.HTTP).scheme("bearer").bearerFormat("JWT")))
                 .info(new Info()
                         .title("Food Delivery API")
-                        .description("API Rest da aplicação food delivery.")
+                        .description("API Rest da aplicação Food Delivery.")
                         .contact(new Contact()
                                 .name("Lucas Campos")
                                 .url("https://www.linkedin.com/in/lucascamposdev/")));

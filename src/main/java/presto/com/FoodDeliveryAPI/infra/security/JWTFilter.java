@@ -6,6 +6,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ProblemDetail;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -59,13 +60,15 @@ public class JWTFilter extends OncePerRequestFilter {
     }
 
     private void sendErrorResponse (HttpServletResponse response) throws IOException {
-        ApiErrorMessage msg = new ApiErrorMessage("Invalid token.");
+        var pb = ProblemDetail.forStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        pb.setTitle("Unauthorized");
+        pb.setDetail("Invalid token.");
 
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         response.setCharacterEncoding("UTF-8");
         response.setContentType("application/json");
 
-        objectMapper.writeValue(response.getWriter(), msg);
+        objectMapper.writeValue(response.getWriter(), pb);
     }
 }
 

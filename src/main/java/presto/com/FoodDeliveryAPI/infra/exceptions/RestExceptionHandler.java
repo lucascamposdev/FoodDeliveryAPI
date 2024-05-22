@@ -1,94 +1,82 @@
 package presto.com.FoodDeliveryAPI.infra.exceptions;
 
 import jakarta.persistence.EntityNotFoundException;
+import lombok.Getter;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.ProblemDetail;
 import org.springframework.http.converter.HttpMessageNotReadableException;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 @RestControllerAdvice
 public class RestExceptionHandler {
 
-    @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<ApiErrorMessage> handleIllegalArgumentException(IllegalArgumentException ex){
-        ApiErrorMessage apiErrorMessage = new ApiErrorMessage(ex.getMessage());
-        return ResponseEntity.badRequest().body(apiErrorMessage);
-    }
-
-    @ExceptionHandler(HttpMessageNotReadableException.class)
-    public ResponseEntity<ApiErrorMessage> handleHttpMessageNotReadableException(HttpMessageNotReadableException ex) {
-        String exceptionMessage = ex.getMessage();
-        String message;
-
-        if (exceptionMessage.contains("Enum")){
-            message = "Nome da semana incorreto.";
-        }else if(exceptionMessage.contains("parse error") || exceptionMessage.contains("body")){
-            message = "Json inválido.";
-        }else{
-            message = ex.getMessage();
-        }
-
-        ApiErrorMessage apiErrorMessage = new ApiErrorMessage(message);
-
-        return ResponseEntity.badRequest().body(apiErrorMessage);
-    }
-
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ApiErrorMessage> handleValidationExceptions(MethodArgumentNotValidException ex) {
-        BindingResult bindingResult = ex.getBindingResult();
-        List<String> errorMessages = ex.getFieldErrors()
-                .stream()
-                .map(FieldError::getDefaultMessage)
-                .collect(Collectors.toList());
-
-        ApiErrorMessage apiErrorMessage = new ApiErrorMessage(errorMessages);
-        return ResponseEntity.badRequest().body(apiErrorMessage);
-    }
-
-    @ExceptionHandler(InvalidRegisterException.class)
-    public ResponseEntity<ApiErrorMessage> handleInvalidRegisterException(InvalidRegisterException ex){
-        ApiErrorMessage apiErrorMessage = new ApiErrorMessage(ex.getMessage());
-        return ResponseEntity.badRequest().body(apiErrorMessage);
-    }
-
-    @ExceptionHandler(DataIntegrityViolationException.class)
-    public ResponseEntity<ApiErrorMessage> handleDataIntegrityViolationException(DataIntegrityViolationException ex){
-        ApiErrorMessage apiErrorMessage = new ApiErrorMessage("email já está em uso.");
-        return ResponseEntity.badRequest().body(apiErrorMessage);
-    }
-
-    @ExceptionHandler(InvalidPermissionException.class)
-    public ResponseEntity<ApiErrorMessage> handleInvalidPermissionException(InvalidPermissionException ex){
-        ApiErrorMessage apiErrorMessage = new ApiErrorMessage(ex.getMessage());
-        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(apiErrorMessage);
-    }
-
-    @ExceptionHandler(BadCredentialsException.class)
-    public ResponseEntity<String> handleBadCredentialsException(BadCredentialsException ex) {
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciais incorretas.");
-    }
-
-    @ExceptionHandler(InvalidUpdateException.class)
-    public ResponseEntity<ApiErrorMessage> handleInvalidUpdateException(InvalidUpdateException ex){
-        ApiErrorMessage apiErrorMessage = new ApiErrorMessage(ex.getMessage());
-        return ResponseEntity.badRequest().body(apiErrorMessage);
+    @ExceptionHandler(FoodDeliveryException.class)
+    public ProblemDetail handleFoodDeliveryException(FoodDeliveryException ex){
+        return ex.toProblemDetail();
     }
 
     @ExceptionHandler(EntityNotFoundException.class)
-    public ResponseEntity<ApiErrorMessage> handleEntityNotFoundException(EntityNotFoundException ex){
-        ApiErrorMessage apiErrorMessage = new ApiErrorMessage(ex.getMessage());
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(apiErrorMessage);
+    public ProblemDetail handleEntityNotFoundException(EntityNotFoundException ex){
+        var pb = ProblemDetail.forStatus(HttpStatus.NOT_FOUND);
+        pb.setTitle("Data not found");
+        pb.setDetail(ex.getMessage());
+
+        return pb;
+    }
+
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ProblemDetail handleHttpMessageNotReadableException(HttpMessageNotReadableException ex){
+        var pb = ProblemDetail.forStatus(HttpStatus.BAD_REQUEST);
+        pb.setTitle("Invalid JSON");
+        pb.setDetail(ex.getMessage());
+
+        return pb;
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ProblemDetail handleDataIntegrityViolationException(DataIntegrityViolationException ex){
+        var cause = ex.getCause();
+
+            if (cause.getMessage().contains("credentials_email_key")) {
+                var pb = ProblemDetail.forStatus(HttpStatus.CONFLICT);
+                pb.setTitle("Email already exists");
+                pb.setDetail("Este email já está cadastrado.");
+
+                return pb;
+            }
+
+        var pb = ProblemDetail.forStatus(HttpStatus.BAD_REQUEST);
+        pb.setTitle("Data Integrity Violation");
+        pb.setDetail("Ocorreu uma violação de integridade de dados.");
+
+        return pb;
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ProblemDetail handleApplicationException(MethodArgumentNotValidException ex){
+
+        var fieldErrors = ex.getFieldErrors()
+                .stream()
+                .map(f -> new InvalidParam(f.getField(), f.getDefaultMessage()))
+                .toList();
+
+        var pb = ProblemDetail.forStatus(HttpStatus.BAD_REQUEST);
+
+        pb.setTitle("Your request parameters didn't validate");
+        pb.setProperty("invalid-params", fieldErrors);
+
+        return pb;
+    }
+
+
+        public record InvalidParam(String name, String message) {
+
     }
 }
+
 
 
 
