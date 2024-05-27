@@ -44,8 +44,8 @@ A API poderá ser acessada em http://localhost:8080
 # clonar repositório
 git clone https://github.com/lucascamposdev/FoodDeliveryAPI.git
 
-# executar o projeto
-mvn spring-boot:run
+# executar o projeto (Docker)
+docker compose up --build
 
 # executar os testes
 mvn test
